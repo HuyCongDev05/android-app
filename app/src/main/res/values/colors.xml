@@ -1,0 +1,4 @@
+<resources>
+    <color name="background">#FFFFFF</color>   <!-- nền sáng -->
+    <color name="textColor">#000000</color>    <!-- chữ tối -->
+</resources>

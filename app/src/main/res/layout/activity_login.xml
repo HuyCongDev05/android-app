@@ -1,0 +1,116 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/background">
+
+    <ImageView
+        android:id="@+id/logoImage"
+        android:layout_width="120dp"
+        android:layout_height="120dp"
+        android:layout_marginTop="64dp"
+        android:src="@drawable/logo"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.498" />
+
+    <TextView
+        android:id="@+id/titleText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="25dp"
+        android:text="@string/title_prompt"
+        android:textColor="@color/textColor"
+        android:textSize="21sp"
+        android:textStyle="bold"
+        android:fontFamily="@font/playwrite"
+        app:layout_constraintTop_toBottomOf="@id/logoImage"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent" />
+
+    <EditText
+        android:id="@+id/emailInput"
+        android:layout_width="320dp"
+        android:layout_height="50dp"
+        android:layout_marginTop="60dp"
+        android:background="@drawable/rounded_button"
+        android:hint="@string/email_prompt"
+        android:inputType="textEmailAddress"
+        android:padding="12dp"
+        android:textColor="@color/textColor"
+        android:textColorHint="@color/textColor"
+        app:layout_constraintTop_toBottomOf="@id/titleText"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.491" />
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/passwordInputLayout"
+        android:layout_width="320dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:background="@drawable/rounded_button"
+        app:boxBackgroundMode="filled"
+        app:endIconMode="password_toggle"
+        app:boxCornerRadiusTopStart="12dp"
+        app:boxCornerRadiusTopEnd="12dp"
+        app:boxCornerRadiusBottomStart="12dp"
+        app:boxCornerRadiusBottomEnd="12dp"
+        app:boxBackgroundColor="#AAAAAA"
+        app:layout_constraintTop_toBottomOf="@id/emailInput"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.491"
+        app:boxStrokeColor="@android:color/transparent"
+        app:boxStrokeWidth="0dp"
+        app:boxStrokeWidthFocused="0dp"
+        app:helperTextEnabled="false"
+        app:hintEnabled="false">
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/passwordInput"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:hint="@string/passWord_prompt"
+            android:inputType="textPassword"
+            android:padding="12dp"
+            android:textColor="@color/textColor"
+            android:textColorHint="@color/textColor"
+            android:background="@drawable/rounded_button" />
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <Button
+        android:id="@+id/buttonLogin"
+        android:layout_width="320dp"
+        android:layout_height="50dp"
+        android:layout_marginTop="20dp"
+        android:background="@drawable/rounded_button"
+        android:text="@string/login_prompt"
+        android:textColor="@color/textColor"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.491"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/passwordInputLayout" />
+
+    <TextView
+        android:id="@+id/registerText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="9dp"
+        android:paddingTop="0dp"
+        android:text="@string/registerText_prompt"
+        android:textColor="@color/textColor"
+        android:minHeight="48dp"
+        android:textSize="17sp"
+        android:clickable="true"
+        android:focusable="true"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.497"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/buttonLogin" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

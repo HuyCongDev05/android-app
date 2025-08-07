@@ -1,0 +1,11 @@
+<resources>
+    <string name="app_name">Mọt Truyện</string>
+    <string name="registerText_prompt">Chưa có tài khoản ? Đăng ký</string>
+    <string name="backToLogin_prompt">Đã có tài khoản ? Đăng nhập</string>
+    <string name="title_prompt">Khám phá thế giới truyện tranh</string>
+    <string name="email_prompt">Email hoặc số điện thoại</string>
+    <string name="passWord_prompt">Mật khẩu</string>
+    <string name="login_prompt">Đăng nhập</string>
+    <string name="register_prompt">Đăng ký</string>
+    <string name="checkboxAgree_prompt">Đồng ý với các điều khoản và chính sách bảo mật</string>
+</resources>
