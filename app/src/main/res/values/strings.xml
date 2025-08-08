@@ -8,4 +8,6 @@
     <string name="login_prompt">Đăng nhập</string>
     <string name="register_prompt">Đăng ký</string>
     <string name="checkboxAgree_prompt">Đồng ý với các điều khoản và chính sách bảo mật</string>
+    <string name="ComicNew_prompt">Truyện mới</string>
+    <string name="ComicPropose_prompt">Đề xuất</string>
 </resources>
