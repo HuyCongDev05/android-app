@@ -13,11 +13,12 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.Test">
 
-        <activity android:name=".RegisterActivity" />
+        <activity android:name=".ui.RegisterUI" />
         <activity android:name=".MainActivity" />
+        <activity android:name=".ui.HomeUI"/>
 
         <activity
-            android:name=".LoginActivity"
+            android:name=".ui.LoginUI"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

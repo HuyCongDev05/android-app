@@ -1,4 +1,4 @@
-package com.example.test;
+package com.example.test.ui;
 
 import android.content.Context;
 import android.content.Intent;
@@ -10,9 +10,12 @@ import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.example.test.R;
 import com.example.test.animation.animationNext;
+import com.example.test.service.LoginService;
 
-public class LoginActivity extends AppCompatActivity {
+public class LoginUI extends AppCompatActivity {
+    LoginService loginService = new LoginService();
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -28,15 +31,18 @@ public class LoginActivity extends AppCompatActivity {
             register();
         });
         loginButton.setOnClickListener(v -> {
-            if (!checkLogin(this, emailInput.getText().toString().trim(), passwordInput.getText().toString().trim())) return;
-            Toast.makeText(this, "Đăng nhập thành công", Toast.LENGTH_SHORT).show();
-            // nên thay bằng animation quay tròn cho đẹp
+            if (!checkLogin(this, emailInput.getText().toString().trim(), passwordInput.getText().toString().trim())) {
+                if(loginService.CheckLogin(emailInput.getText().toString().trim(), passwordInput.getText().toString().trim())) {
+
+
+                }else Toast.makeText(this, "Sai tài khoản hoặc mật khẩu", Toast.LENGTH_SHORT).show();
+            }
         });
     }
     public void register() {
-        Intent intent = new Intent(LoginActivity.this, RegisterActivity.class);
+        Intent intent = new Intent(LoginUI.this, RegisterUI.class);
         startActivity(intent);
-        animationNext.apply(LoginActivity.this);
+        animationNext.apply(LoginUI.this);
         finish();
     }
     public boolean checkLogin(Context context, String emailInput, String passwordInput) {
@@ -44,8 +50,13 @@ public class LoginActivity extends AppCompatActivity {
             Toast.makeText(context, "Vui lòng nhập đầy đủ thông tin", Toast.LENGTH_SHORT).show();
             return false;
         }
-        // thêm điều kiện kiểm tra mật khẩu với database
-
         return true;
+    }
+    public void nextHomeUI() {
+        Toast.makeText(this, "Đăng nhập thành công", Toast.LENGTH_SHORT).show();
+        Intent intent = new Intent(LoginUI.this, HomeUI.class);
+        startActivity(intent);
+        // animation load
+        finish();
     }
 }

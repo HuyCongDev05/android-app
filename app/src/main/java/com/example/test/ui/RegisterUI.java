@@ -1,4 +1,4 @@
-package com.example.test;
+package com.example.test.ui;
 
 import android.content.Context;
 import android.content.Intent;
@@ -13,9 +13,12 @@ import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.example.test.R;
 import com.example.test.animation.animationBack;
+import com.example.test.service.RegisterService;
 
-public class RegisterActivity extends AppCompatActivity {
+public class RegisterUI extends AppCompatActivity {
+    RegisterService registerService = new RegisterService();
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -30,15 +33,18 @@ public class RegisterActivity extends AppCompatActivity {
         backToLogin.setOnClickListener(v -> backToLogin());
 
         buttonRegister.setOnClickListener(v -> {
-            if (!checkRegister(this, emailInput.getText().toString().trim(), passwordInput.getText().toString().trim(), checkboxAgree.isChecked())) return;
-            Toast.makeText(this, "Đăng ký thành công", Toast.LENGTH_SHORT).show();
-            backToLogin();
+            if (!checkRegister(this, emailInput.getText().toString().trim(), passwordInput.getText().toString().trim(), checkboxAgree.isChecked())) {
+                if (registerService.checkRegister(emailInput.getText().toString().trim(), passwordInput.getText().toString().trim())) {
+                    Toast.makeText(this, "Đăng ký thành công", Toast.LENGTH_SHORT).show();
+                    backToLogin();
+                }
+            }
         });
     }
     private void backToLogin() {
-        Intent intent = new Intent(RegisterActivity.this, LoginActivity.class);
+        Intent intent = new Intent(RegisterUI.this, LoginUI.class);
         startActivity(intent);
-        animationBack.apply(RegisterActivity.this);
+        animationBack.apply(RegisterUI.this);
         finish();
     }
     private boolean checkRegister(Context context, String email, String password, boolean agree) {
