@@ -2,26 +2,21 @@ package com.example.test.entity;
 
 public class Comic {
     private String ComicName;
-    private int ComicImage;
+    private String ComicImage;
+    private String APIChapter;
 
-    public Comic (String ComicName, int ComicImage) {
-        this.ComicName = ComicName;
-        this.ComicImage = ComicImage;
+    public Comic(String comicName, String comicImage, String APIChapter) {
+        ComicName = comicName;
+        ComicImage = comicImage;
+        this.APIChapter = APIChapter;
     }
 
     public String getComicName() {
         return ComicName;
     }
 
-    public void setComicName(String comicName) {
-        ComicName = comicName;
-    }
-
-    public int getComicImage() {
+    public String getComicImage() {
         return ComicImage;
     }
 
-    public void setComicImage(int comicImage) {
-        ComicImage = comicImage;
-    }
 }
