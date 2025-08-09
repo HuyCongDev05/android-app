@@ -12,6 +12,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.test.R;
 import com.example.test.animation.animationNext;
+import com.example.test.repository.ComicListRepository;
 import com.example.test.service.LoginService;
 
 public class LoginUI extends AppCompatActivity {
@@ -20,6 +21,7 @@ public class LoginUI extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
+        ComicListRepository.loadComicsAsync();
 
         TextView registerText = findViewById(R.id.registerText);
         Button loginButton = findViewById(R.id.buttonLogin);

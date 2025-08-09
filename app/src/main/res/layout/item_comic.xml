@@ -8,8 +8,7 @@
         android:id="@+id/ImgComic"
         android:layout_width="120dp"
         android:layout_height="160dp"
-        android:scaleType="centerCrop"
-        android:src="" />
+        android:scaleType="centerCrop" />
 
     <TextView
         android:id="@+id/NameComic"

@@ -29,40 +29,38 @@ public class HomeUI extends AppCompatActivity {
         ImageView imageView = view.findViewById(R.id.ImgComic);
         TextView nameView = view.findViewById(R.id.NameComic);
 
-        nameView.setText(comic.getComicName());
+        String comicName = comic.getName();
+        if (comicName == null || comicName.trim().isEmpty()) {
+            comicName = "Tên truyện đang cập nhật...";
+        }
+        nameView.setText(comicName);
 
         Glide.with(this)
-                .load(comic.getComicImage())
+                .load(comic.getImageUrl())
                 .into(imageView);
 
         return view;
     }
-    public void ComicListBook(HashMap<String , List<Comic>> List) {
-
+    public void ComicListBook(HashMap<String, List<Comic>> map) {
         // Xử lý list ComicNew
-        new Thread(() -> {
-            List<Comic> newComics = List.get("NewComic");
-            runOnUiThread(() -> {
-                LinearLayout comicNewListLayout = findViewById(R.id.ComicNewList);
-                for (Comic comic : newComics) {
-                    View comicView = createComicView(comic);
-                    comicNewListLayout.addView(comicView);
-                }
-            });
-        }).start();
+        List<Comic> newComics = map.get("newComics");
+        if (newComics != null && !newComics.isEmpty()) {
+            LinearLayout comicNewListLayout = findViewById(R.id.ComicNewList);
+            for (Comic comic : newComics) {
+                View comicView = createComicView(comic);
+                comicNewListLayout.addView(comicView);
+            }
+        }
 
-    // Xử lý list ComicPropose
-        new Thread(() -> {
-            List<Comic> proposeComics = List.get("ComicPropose");
-
-            runOnUiThread(() -> {
-                LinearLayout comicProposeListLayout = findViewById(R.id.ProposeList);
-                for (Comic comic : proposeComics) {
-                    View comicView = createComicView(comic);
-                    comicProposeListLayout.addView(comicView);
-                }
-            });
-        }).start();
+        // Xử lý list ComicPropose
+        List<Comic> proposeComics = map.get("proposeComics");
+        if (proposeComics != null && !proposeComics.isEmpty()) {
+            LinearLayout comicProposeListLayout = findViewById(R.id.ProposeList);
+            for (Comic comic : proposeComics) {
+                View comicView = createComicView(comic);
+                comicProposeListLayout.addView(comicView);
+            }
+        }
     }
 }
 

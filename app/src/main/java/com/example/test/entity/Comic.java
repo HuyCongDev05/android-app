@@ -1,27 +1,37 @@
 package com.example.test.entity;
 
-public class Comic {
-    private String ComicName;
-    private int ComicImage;
+public  class Comic {
+    public String name;
+    public String slug;
+    public String imageUrl;
 
-    public Comic (String ComicName, int ComicImage) {
-        this.ComicName = ComicName;
-        this.ComicImage = ComicImage;
+    public Comic(String name, String slug, String imageUrl) {
+        this.name = name;
+        this.slug = slug;
+        this.imageUrl = imageUrl;
     }
 
-    public String getComicName() {
-        return ComicName;
+    public String getSlug() {
+        return slug;
     }
 
-    public void setComicName(String comicName) {
-        ComicName = comicName;
+    public void setSlug(String slug) {
+        this.slug = slug;
     }
 
-    public int getComicImage() {
-        return ComicImage;
+    public String getName() {
+        return name;
     }
 
-    public void setComicImage(int comicImage) {
-        ComicImage = comicImage;
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public String getImageUrl() {
+        return imageUrl;
+    }
+
+    public void setImageUrl(String imageUrl) {
+        this.imageUrl = imageUrl;
     }
 }

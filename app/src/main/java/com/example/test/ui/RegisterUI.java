@@ -19,6 +19,7 @@ import com.example.test.service.RegisterService;
 
 public class RegisterUI extends AppCompatActivity {
     RegisterService registerService = new RegisterService();
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
