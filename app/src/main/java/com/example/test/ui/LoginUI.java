@@ -35,8 +35,10 @@ public class LoginUI extends AppCompatActivity {
         loginButton.setOnClickListener(v -> {
             if (!checkLogin(this, emailInput.getText().toString().trim(), passwordInput.getText().toString().trim())) {
                 if(loginService.CheckLogin(emailInput.getText().toString().trim(), passwordInput.getText().toString().trim())) {
-
-
+                    Intent intent = new Intent(LoginUI.this, HomeUI.class);
+                    startActivity(intent);
+                    animationNext.apply(LoginUI.this);
+                    finish();
                 }else Toast.makeText(this, "Sai tài khoản hoặc mật khẩu", Toast.LENGTH_SHORT).show();
             }
         });

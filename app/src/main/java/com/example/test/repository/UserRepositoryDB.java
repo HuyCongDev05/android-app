@@ -9,12 +9,12 @@ public class UserRepositoryDB {
     public boolean CheckLogin(String UserName, String Password) {
         String sql = "SELECT COUNT(*) FROM account WHERE Username = ? AND Password = ?";
         try (Connection conn = ConnectDB.open();
-             PreparedStatement stmt = conn.prepareStatement(sql)) {
+             PreparedStatement preparedStatement = conn.prepareStatement(sql)) {
 
-            stmt.setString(1, UserName);
-            stmt.setString(2, Password);
+            preparedStatement.setString(1, UserName);
+            preparedStatement.setString(2, Password);
 
-            try (ResultSet rs = stmt.executeQuery()) {
+            try (ResultSet rs = preparedStatement.executeQuery()) {
                 if (rs.next()) {
                     return rs.getInt(1) > 0;
                 }
@@ -28,12 +28,12 @@ public class UserRepositoryDB {
     public boolean CreateUser(String UserName, String Password) {
         String sql = "INSERT INTO account (Username, Password, CreationTime) VALUES (?, ?, NOW())";
         try (Connection conn = ConnectDB.open();
-             PreparedStatement stmt = conn.prepareStatement(sql)) {
+             PreparedStatement preparedStatement = conn.prepareStatement(sql)) {
 
-            stmt.setString(1, UserName);
-            stmt.setString(2, Password);
+            preparedStatement.setString(1, UserName);
+            preparedStatement.setString(2, Password);
 
-            int rows = stmt.executeUpdate();
+            int rows = preparedStatement.executeUpdate();
             return rows > 0;
         } catch (SQLException e) {
             e.printStackTrace();
