@@ -2,7 +2,6 @@ package com.example.test.repository;
 
 import android.os.Handler;
 import android.os.Looper;
-import android.util.Log;
 
 import com.example.test.config.ConnectAPI;
 import com.example.test.entity.Comic;
@@ -42,11 +41,9 @@ public class ComicListRepository {
                     try {
                         map.put("proposeComics", proposeFuture.get());
                         map.put("newComics", newFuture.get());
-                        Log.d("ComicListRepository", "Dữ liệu tải xong: " + map.toString());
                         mainHandler.post(() -> homeUI.ComicListBook(map));
                     } catch (Exception e) {
                         e.printStackTrace();
-                        Log.e("ComicListRepository", "Lỗi khi load hoặc cập nhật UI: " + e.getMessage());
                     }
                 });
     }

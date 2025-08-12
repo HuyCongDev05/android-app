@@ -27,9 +27,7 @@ public class LoginUI extends AppCompatActivity {
         TextView passwordInput = findViewById(R.id.passwordInput);
 
 
-        registerText.setOnClickListener(v -> {
-            register();
-        });
+        registerText.setOnClickListener(v -> register());
         loginButton.setOnClickListener(v -> {
             if (checkLogin(this, emailInput.getText().toString().trim(), passwordInput.getText().toString().trim())) {
                 loginService.CheckLoginAsync(emailInput.getText().toString().trim(), passwordInput.getText().toString().trim(), success -> {
