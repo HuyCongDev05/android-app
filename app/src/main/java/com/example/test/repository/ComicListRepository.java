@@ -2,7 +2,9 @@ package com.example.test.repository;
 
 import android.os.Handler;
 import android.os.Looper;
+import android.util.Log;
 
+import com.example.test.config.ConnectAPI;
 import com.example.test.entity.Comic;
 import com.example.test.ui.HomeUI;
 import com.google.gson.JsonArray;
@@ -22,17 +24,16 @@ public class ComicListRepository {
     private static final Handler mainHandler = new Handler(Looper.getMainLooper());
     private static final ConnectAPI connectAPI = new ConnectAPI();
 
-    private static HomeUI homeUI = new HomeUI();
 
-    public static void loadComicsAsync() {
+    public static void loadComicsAsync(HomeUI homeUI) {
         HashMap<String, List<Comic>> map = new HashMap<>();
         CompletableFuture<List<Comic>> proposeFuture = CompletableFuture.supplyAsync(() -> {
-            String json = connectAPI.get("https://otruyenapi.com/v1/api/home");
+            String json = connectAPI.getAPIComic("https://otruyenapi.com/v1/api/home");
             return parseHomeAPI(json);
         }, executor);
 
         CompletableFuture<List<Comic>> newFuture = CompletableFuture.supplyAsync(() -> {
-            String json = connectAPI.get("https://otruyenapi.com/v1/api/danh-sach/truyen-moi?page=1");
+            String json = connectAPI.getAPIComic("https://otruyenapi.com/v1/api/danh-sach/truyen-moi?page=1");
             return parseNewComicsAPI(json);
         }, executor);
 
@@ -41,9 +42,11 @@ public class ComicListRepository {
                     try {
                         map.put("proposeComics", proposeFuture.get());
                         map.put("newComics", newFuture.get());
+                        Log.d("ComicListRepository", "Dữ liệu tải xong: " + map.toString());
                         mainHandler.post(() -> homeUI.ComicListBook(map));
                     } catch (Exception e) {
                         e.printStackTrace();
+                        Log.e("ComicListRepository", "Lỗi khi load hoặc cập nhật UI: " + e.getMessage());
                     }
                 });
     }
@@ -87,12 +90,4 @@ public class ComicListRepository {
         }
         return comics;
     }
-
-
-    public interface OnComicsLoaded {
-        void onResult(HashMap<String, List<Comic>> data);
-
-        void onError(Exception e);
-    }
-
 }

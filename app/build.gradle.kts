@@ -43,11 +43,7 @@ dependencies {
     implementation ("com.github.bumptech.glide:glide:4.16.0")
     implementation(libs.compilercommon)
     annotationProcessor ("com.github.bumptech.glide:compiler:4.16.0")
-    implementation("mysql:mysql-connector-java:8.0.33")
     implementation("com.google.code.gson:gson:2.11.0")
-    implementation("mysql:mysql-connector-java:8.0.33") {
-        exclude(group = "com.google.guava", module = "guava")
-    }
     implementation("com.google.guava:listenablefuture:9999.0-empty-to-avoid-conflict-with-guava")
     testImplementation(libs.junit)
     androidTestImplementation(libs.ext.junit)

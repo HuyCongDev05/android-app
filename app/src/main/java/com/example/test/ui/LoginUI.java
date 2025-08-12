@@ -12,7 +12,6 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.test.R;
 import com.example.test.animation.animationNext;
-import com.example.test.repository.ComicListRepository;
 import com.example.test.service.LoginService;
 
 public class LoginUI extends AppCompatActivity {
@@ -21,7 +20,6 @@ public class LoginUI extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
-        ComicListRepository.loadComicsAsync();
 
         TextView registerText = findViewById(R.id.registerText);
         Button loginButton = findViewById(R.id.buttonLogin);
@@ -33,13 +31,15 @@ public class LoginUI extends AppCompatActivity {
             register();
         });
         loginButton.setOnClickListener(v -> {
-            if (!checkLogin(this, emailInput.getText().toString().trim(), passwordInput.getText().toString().trim())) {
-                if(loginService.CheckLogin(emailInput.getText().toString().trim(), passwordInput.getText().toString().trim())) {
-                    Intent intent = new Intent(LoginUI.this, HomeUI.class);
-                    startActivity(intent);
-                    animationNext.apply(LoginUI.this);
-                    finish();
-                }else Toast.makeText(this, "Sai tài khoản hoặc mật khẩu", Toast.LENGTH_SHORT).show();
+            if (checkLogin(this, emailInput.getText().toString().trim(), passwordInput.getText().toString().trim())) {
+                loginService.CheckLoginAsync(emailInput.getText().toString().trim(), passwordInput.getText().toString().trim(), success -> {
+                    if (success) {
+                        // thêm icon xoay
+                        nextHomeUI();
+                    } else {
+                        Toast.makeText(LoginUI.this, "Sai tài khoản hoặc mật khẩu", Toast.LENGTH_SHORT).show();
+                    }
+                });
             }
         });
     }
