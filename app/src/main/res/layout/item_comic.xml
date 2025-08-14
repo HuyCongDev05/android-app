@@ -6,18 +6,19 @@
 
     <ImageView
         android:id="@+id/ImgComic"
-        android:layout_width="120dp"
-        android:layout_height="160dp"
+        android:layout_width="100dp"
+        android:layout_height="140dp"
         android:scaleType="centerCrop" />
 
     <TextView
         android:id="@+id/NameComic"
-        android:layout_width="wrap_content"
+        android:layout_width="100dp"
         android:layout_height="wrap_content"
-        android:text="Tên truyện"
+        android:text=""
         android:textColor="#FFF"
         android:textSize="14sp"
         android:layout_marginTop="4dp"
         android:maxLines="1"
-        android:ellipsize="end"/>
+        android:ellipsize="end"
+        android:singleLine="true"/>
 </LinearLayout>

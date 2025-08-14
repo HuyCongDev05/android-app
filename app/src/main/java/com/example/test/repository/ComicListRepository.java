@@ -24,15 +24,18 @@ public class ComicListRepository {
     private static final ConnectAPI connectAPI = new ConnectAPI();
 
 
-    public static void loadComicsAsync(HomeUI homeUI) {
+
+    public static void loadComicsAsync(LoadCallback callback) {
+        HomeUI homeUI = new HomeUI();
         HashMap<String, List<Comic>> map = new HashMap<>();
+
         CompletableFuture<List<Comic>> proposeFuture = CompletableFuture.supplyAsync(() -> {
             String json = connectAPI.getAPIComic("https://otruyenapi.com/v1/api/home");
             return parseHomeAPI(json);
         }, executor);
 
         CompletableFuture<List<Comic>> newFuture = CompletableFuture.supplyAsync(() -> {
-            String json = connectAPI.getAPIComic("https://otruyenapi.com/v1/api/danh-sach/truyen-moi?page=1");
+            String json = connectAPI.getAPIComic("https://otruyenapi.com/v1/api/danh-sach/truyen-moi?page=2");
             return parseNewComicsAPI(json);
         }, executor);
 
@@ -41,12 +44,14 @@ public class ComicListRepository {
                     try {
                         map.put("proposeComics", proposeFuture.get());
                         map.put("newComics", newFuture.get());
-                        mainHandler.post(() -> homeUI.ComicListBook(map));
+
+                        mainHandler.post(() -> callback.onLoaded(true, map));
                     } catch (Exception e) {
-                        e.printStackTrace();
+                        System.out.println("Lỗi: " + e.getMessage());
                     }
                 });
     }
+
 
     // danh sách đề xuất
     private static List<Comic> parseHomeAPI(String json) {
@@ -59,10 +64,9 @@ public class ComicListRepository {
         int size = Math.min(ogImages.size(), items.size());
         for (int i = 0; i < size; i++) {
             String img = "https://otruyenapi.com" + ogImages.get(i).getAsString();
-            String originName = items.get(i).getAsJsonObject()
-                    .getAsJsonArray("origin_name").get(0).getAsString();
+            String name = items.get(i).getAsJsonObject().get("name").getAsString();
             String slug = items.get(i).getAsJsonObject().get("slug").getAsString();
-            comics.add(new Comic(originName, slug, img));
+            comics.add(new Comic(name, slug, img));
         }
         return comics;
     }
@@ -81,9 +85,9 @@ public class ComicListRepository {
         for (int i = 0; i < size; i++) {
             JsonObject obj = items.get(i).getAsJsonObject();
             String img = "https://otruyenapi.com" + ogImages.get(i).getAsString();
-            String originName = obj.getAsJsonArray("origin_name").get(0).getAsString();
+            String name = obj.get("name").getAsString();
             String slug = obj.get("slug").getAsString();
-            comics.add(new Comic(originName, slug, img));
+            comics.add(new Comic(name, slug, img));
         }
         return comics;
     }
