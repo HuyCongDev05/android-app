@@ -1,4 +1,6 @@
 <resources>
     <color name="background">#FFFFFF</color>   <!-- nền sáng -->
     <color name="textColor">#000000</color>    <!-- chữ tối -->
+    <color name="nav_active">#FA4C4C</color> <!-- Khi nút được chọn -->
+    <color name="nav_inactive">#FFFFFF</color> <!-- Khi nút chưa chọn -->
 </resources>
