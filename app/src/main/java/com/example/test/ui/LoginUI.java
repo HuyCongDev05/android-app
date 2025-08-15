@@ -81,6 +81,7 @@ public class LoginUI extends AppCompatActivity {
         Toast.makeText(this, "Đăng nhập thành công", Toast.LENGTH_SHORT).show();
         Intent intent = new Intent(LoginUI.this, HomeUI.class);
         startActivity(intent);
+        animationNext.apply(LoginUI.this);
         finish();
     }
 }
