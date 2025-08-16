@@ -1,6 +1,6 @@
 package com.example.test.animation;
 
-public class animationLoad {
+public class AnimationLoad {
     public static void apply() {
 
     }

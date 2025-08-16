@@ -14,7 +14,7 @@ import android.widget.Toast;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.test.R;
-import com.example.test.animation.animationBack;
+import com.example.test.animation.AnimationBack;
 import com.example.test.service.RegisterService;
 
 public class RegisterUI extends AppCompatActivity {
@@ -49,7 +49,7 @@ public class RegisterUI extends AppCompatActivity {
     private void backToLogin() {
         Intent intent = new Intent(RegisterUI.this, LoginUI.class);
         startActivity(intent);
-        animationBack.apply(RegisterUI.this);
+        AnimationBack.apply(RegisterUI.this);
         finish();
     }
     private boolean checkRegister(Context context, String email, String password, boolean agree) {

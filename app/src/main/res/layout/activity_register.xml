@@ -4,7 +4,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/background">
+    android:background="#000000">
 
     <ImageView
         android:id="@+id/logoImage"
@@ -23,7 +23,7 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="25dp"
         android:text="@string/title_prompt"
-        android:textColor="@color/textColor"
+        android:textColor="#FFF"
         android:textSize="21sp"
         android:textStyle="bold"
         android:fontFamily="@font/playwrite"
@@ -40,8 +40,8 @@
         android:hint="@string/email_prompt"
         android:inputType="textEmailAddress"
         android:padding="12dp"
-        android:textColor="@color/textColor"
-        android:textColorHint="#888888"
+        android:textColor="#FFF"
+        android:textColorHint="#FFF"
         app:layout_constraintTop_toBottomOf="@id/titleText"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
@@ -59,7 +59,7 @@
         app:boxCornerRadiusTopEnd="12dp"
         app:boxCornerRadiusBottomStart="12dp"
         app:boxCornerRadiusBottomEnd="12dp"
-        app:boxBackgroundColor="#AAAAAA"
+        app:boxBackgroundColor="#FFF"
         app:layout_constraintTop_toBottomOf="@id/emailInput"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
@@ -77,8 +77,8 @@
             android:hint="@string/passWord_prompt"
             android:inputType="textPassword"
             android:padding="12dp"
-            android:textColor="@color/textColor"
-            android:textColorHint="#888888"
+            android:textColor="#FFF"
+            android:textColorHint="#FFF"
             android:background="@drawable/rounded_button" />
     </com.google.android.material.textfield.TextInputLayout>
 
@@ -89,6 +89,7 @@
         android:layout_marginTop="10dp"
         android:text="@string/checkboxAgree_prompt"
         android:checked="false"
+        android:textColor="#FFF"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.491"
         app:layout_constraintStart_toStartOf="parent"
@@ -99,9 +100,9 @@
         android:layout_width="320dp"
         android:layout_height="50dp"
         android:layout_marginTop="10dp"
-        android:background="@drawable/rounded_button"
+        android:backgroundTint="#FF4D8C"
         android:text="@string/register_prompt"
-        android:textColor="@color/textColor"
+        android:textColor="#FFF"
         android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.491"
@@ -115,7 +116,7 @@
         android:layout_marginTop="9dp"
         android:paddingTop="0dp"
         android:text="@string/backToLogin_prompt"
-        android:textColor="@color/textColor"
+        android:textColor="#FFF"
         android:minHeight="48dp"
         android:textSize="17sp"
         android:clickable="true"

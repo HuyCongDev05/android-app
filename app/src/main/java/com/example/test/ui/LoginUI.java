@@ -16,7 +16,7 @@ import android.widget.Toast;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.test.R;
-import com.example.test.animation.animationNext;
+import com.example.test.animation.AnimationNext;
 import com.example.test.repository.ComicListRepository;
 import com.example.test.repository.DataCache;
 import com.example.test.service.LoginService;
@@ -65,7 +65,7 @@ public class LoginUI extends AppCompatActivity {
     public void register() {
         Intent intent = new Intent(LoginUI.this, RegisterUI.class);
         startActivity(intent);
-        animationNext.apply(LoginUI.this);
+        AnimationNext.apply(LoginUI.this);
         finish();
     }
 
@@ -81,7 +81,7 @@ public class LoginUI extends AppCompatActivity {
         Toast.makeText(this, "Đăng nhập thành công", Toast.LENGTH_SHORT).show();
         Intent intent = new Intent(LoginUI.this, HomeUI.class);
         startActivity(intent);
-        animationNext.apply(LoginUI.this);
+        AnimationNext.apply(LoginUI.this);
         finish();
     }
 }

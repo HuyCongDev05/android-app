@@ -3,7 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/background">
+    android:background="#000000">
 
     <ImageView
         android:id="@+id/logoImage"
@@ -23,7 +23,7 @@
         android:layout_marginTop="25dp"
         android:fontFamily="@font/playwrite"
         android:text="@string/title_prompt"
-        android:textColor="@color/textColor"
+        android:textColor="#FFF"
         android:textSize="21sp"
         android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="parent"
@@ -39,8 +39,8 @@
         android:hint="@string/email_prompt"
         android:inputType="textEmailAddress"
         android:padding="12dp"
-        android:textColor="@color/textColor"
-        android:textColorHint="@color/textColor"
+        android:textColor="#FFFFFF"
+        android:textColorHint="#FFFFFF"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.491"
         app:layout_constraintStart_toStartOf="parent"
@@ -77,8 +77,8 @@
             android:hint="@string/passWord_prompt"
             android:inputType="textPassword"
             android:padding="12dp"
-            android:textColor="@color/textColor"
-            android:textColorHint="@color/textColor" />
+            android:textColor="#FFFFFF"
+            android:textColorHint="#FFFFFF" />
     </com.google.android.material.textfield.TextInputLayout>
 
     <Button
@@ -86,9 +86,9 @@
         android:layout_width="320dp"
         android:layout_height="50dp"
         android:layout_marginTop="20dp"
-        android:background="@drawable/rounded_button"
+        android:backgroundTint="#FF4D8C"
         android:text="@string/login_prompt"
-        android:textColor="@color/textColor"
+        android:textColor="#FFFFFF"
         android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.491"
@@ -105,7 +105,7 @@
         android:minHeight="48dp"
         android:paddingTop="0dp"
         android:text="@string/registerText_prompt"
-        android:textColor="@color/textColor"
+        android:textColor="#FFFFFF"
         android:textSize="17sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.497"
