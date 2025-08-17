@@ -1,0 +1,62 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#000000">
+
+    <!-- Nơi để hiển thị fragment -->
+    <FrameLayout
+        android:id="@+id/fragment_container"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_above="@+id/taskbar" />
+
+    <!-- Thanh taskbar dưới cùng -->
+    <FrameLayout
+        android:id="@+id/taskbar"
+        android:layout_width="match_parent"
+        android:layout_height="56dp"
+        android:layout_alignParentBottom="true"
+        android:layout_marginBottom="15dp">
+
+        <!-- Vòng tròn highlight màu hồng chạy qua lại (nằm dưới các nút) -->
+        <View
+            android:id="@+id/highlight"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:layout_gravity="center_vertical"
+            android:background="@drawable/circle_bg"
+            android:translationX="0dp" />
+
+        <!-- Các nút điều hướng (trong suốt, icon trắng) -->
+        <LinearLayout
+            android:id="@+id/nav_buttons"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:gravity="center"
+            android:orientation="horizontal">
+
+            <!-- Nút Home -->
+            <ImageView
+                android:id="@+id/btn_home"
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                android:layout_marginHorizontal="8dp"
+                android:background="@android:color/transparent"
+                android:contentDescription="Trang chủ"
+                android:padding="9dp"
+                android:src="@drawable/icon_home" />
+
+
+            <!-- Nút Cài đặt -->
+            <ImageView
+                android:id="@+id/btn_settings"
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                android:layout_marginHorizontal="8dp"
+                android:background="@android:color/transparent"
+                android:contentDescription="Cài dặt"
+                android:padding="9dp"
+                android:src="@drawable/icon_settings" />
+        </LinearLayout>
+    </FrameLayout>
+</RelativeLayout>

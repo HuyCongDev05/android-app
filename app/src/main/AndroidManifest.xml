@@ -20,7 +20,7 @@
 
         <activity android:name=".ui.RegisterUI" />
         <activity android:name=".MainActivity" />
-        <activity android:name=".ui.HomeUI"/>
+        <activity android:name=".ui.HomeFragment"/>
         
         <activity
             android:name=".ui.LoginUI"

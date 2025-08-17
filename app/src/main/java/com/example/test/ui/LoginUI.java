@@ -15,6 +15,7 @@ import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.example.test.MainActivity;
 import com.example.test.R;
 import com.example.test.animation.AnimationNext;
 import com.example.test.repository.ComicListRepository;
@@ -79,7 +80,7 @@ public class LoginUI extends AppCompatActivity {
 
     public void nextHomeUI() {
         Toast.makeText(this, "Đăng nhập thành công", Toast.LENGTH_SHORT).show();
-        Intent intent = new Intent(LoginUI.this, HomeUI.class);
+        Intent intent = new Intent(LoginUI.this, MainActivity.class);
         startActivity(intent);
         AnimationNext.apply(LoginUI.this);
         finish();
