@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
@@ -12,24 +11,24 @@
         android:layout_height="120dp"
         android:layout_marginTop="64dp"
         android:src="@drawable/logo"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.498" />
+        app:layout_constraintHorizontal_bias="0.498"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
         android:id="@+id/titleText"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="25dp"
+        android:fontFamily="@font/playwrite"
         android:text="@string/title_prompt"
         android:textColor="#FFF"
         android:textSize="21sp"
         android:textStyle="bold"
-        android:fontFamily="@font/playwrite"
-        app:layout_constraintTop_toBottomOf="@id/logoImage"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent" />
+        app:layout_constraintTop_toBottomOf="@id/logoImage" />
 
     <EditText
         android:id="@+id/emailInput"
@@ -42,10 +41,10 @@
         android:padding="12dp"
         android:textColor="#FFF"
         android:textColorHint="#FFF"
-        app:layout_constraintTop_toBottomOf="@id/titleText"
-        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.491" />
+        app:layout_constraintHorizontal_bias="0.491"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/titleText" />
 
     <com.google.android.material.textfield.TextInputLayout
         android:id="@+id/passwordInputLayout"
@@ -53,33 +52,33 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="16dp"
         android:background="@drawable/rounded_button"
-        app:boxBackgroundMode="filled"
-        app:endIconMode="password_toggle"
-        app:boxCornerRadiusTopStart="12dp"
-        app:boxCornerRadiusTopEnd="12dp"
-        app:boxCornerRadiusBottomStart="12dp"
-        app:boxCornerRadiusBottomEnd="12dp"
         app:boxBackgroundColor="#FFF"
-        app:layout_constraintTop_toBottomOf="@id/emailInput"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.491"
+        app:boxBackgroundMode="filled"
+        app:boxCornerRadiusBottomEnd="12dp"
+        app:boxCornerRadiusBottomStart="12dp"
+        app:boxCornerRadiusTopEnd="12dp"
+        app:boxCornerRadiusTopStart="12dp"
         app:boxStrokeColor="@android:color/transparent"
         app:boxStrokeWidth="0dp"
         app:boxStrokeWidthFocused="0dp"
+        app:endIconMode="password_toggle"
         app:helperTextEnabled="false"
-        app:hintEnabled="false">
+        app:hintEnabled="false"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.491"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/emailInput">
 
         <com.google.android.material.textfield.TextInputEditText
             android:id="@+id/passwordInput"
             android:layout_width="match_parent"
             android:layout_height="50dp"
+            android:background="@drawable/rounded_button"
             android:hint="@string/passWord_prompt"
             android:inputType="textPassword"
             android:padding="12dp"
             android:textColor="#FFF"
-            android:textColorHint="#FFF"
-            android:background="@drawable/rounded_button" />
+            android:textColorHint="#FFF" />
     </com.google.android.material.textfield.TextInputLayout>
 
     <CheckBox
@@ -87,8 +86,8 @@
         android:layout_width="320dp"
         android:layout_height="48dp"
         android:layout_marginTop="10dp"
-        android:text="@string/checkboxAgree_prompt"
         android:checked="false"
+        android:text="@string/checkboxAgree_prompt"
         android:textColor="#FFF"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.491"
@@ -114,13 +113,13 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="9dp"
+        android:clickable="true"
+        android:focusable="true"
+        android:minHeight="48dp"
         android:paddingTop="0dp"
         android:text="@string/backToLogin_prompt"
         android:textColor="#FFF"
-        android:minHeight="48dp"
         android:textSize="17sp"
-        android:clickable="true"
-        android:focusable="true"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.497"
         app:layout_constraintStart_toStartOf="parent"

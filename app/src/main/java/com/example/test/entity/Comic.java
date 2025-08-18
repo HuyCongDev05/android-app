@@ -1,6 +1,6 @@
 package com.example.test.entity;
 
-public  class Comic {
+public class Comic {
     public String name;
     public String slug;
     public String imageUrl;

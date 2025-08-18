@@ -1,50 +1,32 @@
 package com.example.test;
 
-import android.animation.ObjectAnimator;
 import android.os.Bundle;
-import android.view.View;
-import android.widget.ImageView;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
 
 import com.example.test.ui.HomeFragment;
-import com.example.test.ui.SettingsFragment;
+import com.example.test.ui.ProfileFragment;
 
 public class MainActivity extends AppCompatActivity {
-    private View highlight;
-    private ImageView btnHome, btnSettings;
-    private String currentTab = "HOME";
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        highlight = findViewById(R.id.highlight);
-        btnHome = findViewById(R.id.btn_home);
-        btnSettings = findViewById(R.id.btn_settings);
-
         loadFragment(new HomeFragment());
-        btnHome.post(() -> highlight.setX(btnHome.getX()));
+        selectTab(R.id.icon_home, R.id.text_home);
 
-        btnHome.setOnClickListener(v -> {
-            if (!currentTab.equals("HOME")) {
-                currentTab = "HOME";
-                moveHighlight(btnHome);
-                loadFragment(new HomeFragment());
-            }
+        findViewById(R.id.btn_home).setOnClickListener(v -> {
+            loadFragment(new HomeFragment());
+            selectTab(R.id.icon_home, R.id.text_home);
         });
 
-        btnSettings.setOnClickListener(v -> {
-            if (!currentTab.equals("SETTINGS")) {
-                currentTab = "SETTINGS";
-                moveHighlight(btnSettings);
-                loadFragment(new SettingsFragment());
-            }
+        findViewById(R.id.btn_profile).setOnClickListener(v -> {
+            loadFragment(new ProfileFragment());
+            selectTab(R.id.icon_profile, R.id.text_profile);
         });
     }
-
     private void loadFragment(Fragment fragment) {
         getSupportFragmentManager()
                 .beginTransaction()
@@ -52,10 +34,4 @@ public class MainActivity extends AppCompatActivity {
                 .commit();
     }
 
-    private void moveHighlight(View target) {
-        ObjectAnimator anim = ObjectAnimator.ofFloat(
-                highlight, "x", highlight.getX(), target.getX());
-        anim.setDuration(300);
-        anim.start();
-    }
 }

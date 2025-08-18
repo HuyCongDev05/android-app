@@ -40,7 +40,6 @@ public class LoginUI extends AppCompatActivity {
         spinner.startAnimation(rotation);
 
 
-
         registerText.setOnClickListener(v -> register());
         loginButton.setOnClickListener(v -> {
             if (checkLogin(this, emailInput.getText().toString().trim(), passwordInput.getText().toString().trim())) {

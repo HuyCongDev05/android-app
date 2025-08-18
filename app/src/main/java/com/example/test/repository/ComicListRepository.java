@@ -23,7 +23,6 @@ public class ComicListRepository {
     private static final ConnectAPI connectAPI = new ConnectAPI();
 
 
-
     public static void loadComicsAsync(LoadCallback callback) {
         HashMap<String, List<Comic>> map = new HashMap<>();
 
@@ -40,7 +39,7 @@ public class ComicListRepository {
         CompletableFuture<List<Comic>> finishedFuture = CompletableFuture.supplyAsync(() -> {
             String json = connectAPI.getAPIComic("https://otruyenapi.com/v1/api/danh-sach/hoan-thanh?page=1");
             return parseFinishedComicsAPI(json);
-        },executor);
+        }, executor);
 
         CompletableFuture.allOf(proposeFuture, newFuture)
                 .thenAccept(v -> {
@@ -93,6 +92,7 @@ public class ComicListRepository {
         }
         return comics;
     }
+
     private static List<Comic> parseNewComicsAPI(String json) {
         List<Comic> comics = new ArrayList<>();
         JsonObject data = JsonParser.parseString(json).getAsJsonObject().getAsJsonObject("data");

@@ -1,33 +1,24 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="#000000">
 
-    <!-- Nơi để hiển thị fragment -->
     <FrameLayout
         android:id="@+id/fragment_container"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_above="@+id/taskbar" />
 
-    <!-- Thanh taskbar dưới cùng -->
-    <FrameLayout
+    <LinearLayout
         android:id="@+id/taskbar"
         android:layout_width="match_parent"
-        android:layout_height="56dp"
+        android:layout_height="70dp"
         android:layout_alignParentBottom="true"
-        android:layout_marginBottom="15dp">
+        android:background="#111111"
+        android:gravity="center"
+        android:orientation="horizontal">
 
-        <!-- Vòng tròn highlight màu hồng chạy qua lại (nằm dưới các nút) -->
-        <View
-            android:id="@+id/highlight"
-            android:layout_width="40dp"
-            android:layout_height="40dp"
-            android:layout_gravity="center_vertical"
-            android:background="@drawable/circle_bg"
-            android:translationX="0dp" />
-
-        <!-- Các nút điều hướng (trong suốt, icon trắng) -->
         <LinearLayout
             android:id="@+id/nav_buttons"
             android:layout_width="match_parent"
@@ -35,28 +26,125 @@
             android:gravity="center"
             android:orientation="horizontal">
 
-            <!-- Nút Home -->
-            <ImageView
+            <LinearLayout
                 android:id="@+id/btn_home"
-                android:layout_width="40dp"
-                android:layout_height="40dp"
-                android:layout_marginHorizontal="8dp"
-                android:background="@android:color/transparent"
-                android:contentDescription="Trang chủ"
-                android:padding="9dp"
-                android:src="@drawable/icon_home" />
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:gravity="center"
+                android:orientation="vertical">
 
+                <ImageView
+                    android:id="@+id/icon_home"
+                    android:layout_width="24dp"
+                    android:layout_height="24dp"
+                    android:src="@drawable/icon_home"
+                    app:tint="#FFF" />
 
-            <!-- Nút Cài đặt -->
-            <ImageView
-                android:id="@+id/btn_settings"
-                android:layout_width="40dp"
-                android:layout_height="40dp"
-                android:layout_marginHorizontal="8dp"
-                android:background="@android:color/transparent"
-                android:contentDescription="Cài dặt"
-                android:padding="9dp"
-                android:src="@drawable/icon_settings" />
+                <TextView
+                    android:id="@+id/text_home"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Trang chủ"
+                    android:textColor="#FFF"
+                    android:textSize="11sp" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/btn_follow"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:gravity="center"
+                android:orientation="vertical">
+
+                <ImageView
+                    android:id="@+id/icon_follow"
+                    android:layout_width="24dp"
+                    android:layout_height="24dp"
+                    android:src="@drawable/icon_follow"
+                    app:tint="#FFF" />
+
+                <TextView
+                    android:id="@+id/text_follow"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Theo dõi"
+                    android:textColor="#FFF"
+                    android:textSize="11sp" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/btn_category"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:gravity="center"
+                android:orientation="vertical">
+
+                <ImageView
+                    android:id="@+id/icon_category"
+                    android:layout_width="24dp"
+                    android:layout_height="24dp"
+                    android:src="@drawable/icon_category"
+                    app:tint="#FFF" />
+
+                <TextView
+                    android:id="@+id/text_category"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Thể loại"
+                    android:textColor="#FFF"
+                    android:textSize="11sp" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/btn_notify"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:gravity="center"
+                android:orientation="vertical">
+
+                <ImageView
+                    android:id="@+id/icon_notify"
+                    android:layout_width="24dp"
+                    android:layout_height="24dp"
+                    android:src="@drawable/icon_notify"
+                    app:tint="#FFF" />
+
+                <TextView
+                    android:id="@+id/text_notify"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Thông báo"
+                    android:textColor="#FFF"
+                    android:textSize="11sp" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/btn_profile"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:gravity="center"
+                android:orientation="vertical">
+
+                <ImageView
+                    android:id="@+id/icon_profile"
+                    android:layout_width="24dp"
+                    android:layout_height="24dp"
+                    android:src="@drawable/icon_settings"
+                    app:tint="#FFF" />
+
+                <TextView
+                    android:id="@+id/text_profile"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Trang cá nhân"
+                    android:textColor="#FFF"
+                    android:textSize="11sp" />
+            </LinearLayout>
         </LinearLayout>
-    </FrameLayout>
+    </LinearLayout>
 </RelativeLayout>

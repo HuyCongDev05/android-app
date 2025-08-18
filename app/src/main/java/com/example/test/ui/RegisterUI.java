@@ -37,7 +37,7 @@ public class RegisterUI extends AppCompatActivity {
             if (!checkRegister(this, emailInput.getText().toString().trim(), passwordInput.getText().toString().trim(), checkboxAgree.isChecked())) {
                 registerService.CheckRegisterAsync(emailInput.getText().toString().trim(), passwordInput.getText().toString().trim(), success -> {
                     if (success) {
-                        Toast.makeText(this,"Đăng ký thành công", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(this, "Đăng ký thành công", Toast.LENGTH_SHORT).show();
                         backToLogin();
                     } else {
                         Toast.makeText(this, "Tài khoản đã tồn tại", Toast.LENGTH_SHORT).show();
@@ -46,12 +46,14 @@ public class RegisterUI extends AppCompatActivity {
             }
         });
     }
+
     private void backToLogin() {
         Intent intent = new Intent(RegisterUI.this, LoginUI.class);
         startActivity(intent);
         AnimationBack.apply(RegisterUI.this);
         finish();
     }
+
     private boolean checkRegister(Context context, String email, String password, boolean agree) {
         if (TextUtils.isEmpty(email) || TextUtils.isEmpty(password)) {
             Toast.makeText(context, "Vui lòng nhập đầy đủ thông tin", Toast.LENGTH_SHORT).show();
