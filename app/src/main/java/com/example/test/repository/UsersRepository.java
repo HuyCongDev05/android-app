@@ -7,11 +7,11 @@ public class UsersRepository {
 
     public boolean checkLogin(String username, String password) {
         String jsonData = String.format("{\"username\":\"%s\",\"password\":\"%s\"}", username, password);
-        return connectAPI.postAPIUsers("http://10.0.2.2:8080/api/users/login", jsonData);
+        return connectAPI.postAPIUsers("http://10.0.2.2:8080/api/user/login", jsonData);
     }
 
     public boolean checkRegister(String username, String password) {
         String jsonData = String.format("{\"username\":\"%s\",\"password\":\"%s\"}", username, password);
-        return connectAPI.postAPIUsers("http://10.0.2.2:8080/api/users/register", jsonData);
+        return connectAPI.postAPIUsers("http://10.0.2.2:8080/api/user/register", jsonData);
     }
 }

@@ -35,7 +35,6 @@ public class HomeFragment extends Fragment {
 
         return root;
     }
-
     private View createComicView(Comic comic, ViewGroup parent) {
         LayoutInflater inflater = LayoutInflater.from(getContext());
         View view = inflater.inflate(R.layout.item_comic, parent, false);
@@ -55,6 +54,14 @@ public class HomeFragment extends Fragment {
                 .error(R.drawable.default_comic)
                 .into(imageView);
 
+        view.setOnClickListener(v -> {
+            ComicDetailFragment detailFragment = new ComicDetailFragment();
+            requireActivity().getSupportFragmentManager()
+                    .beginTransaction()
+                    .replace(R.id.fragment_container, detailFragment)
+                    .addToBackStack(null)
+                    .commit();
+        });
         return view;
     }
 
