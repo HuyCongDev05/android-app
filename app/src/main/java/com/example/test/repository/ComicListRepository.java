@@ -18,12 +18,12 @@ import java.util.concurrent.Executors;
 
 
 public class ComicListRepository {
-    private static final ExecutorService executor = Executors.newFixedThreadPool(2);
+    private static final ExecutorService executor = Executors.newFixedThreadPool(3);
     private static final Handler mainHandler = new Handler(Looper.getMainLooper());
     private static final ConnectAPI connectAPI = new ConnectAPI();
 
 
-    public static void loadComicsAsync(LoadCallback callback) {
+    public static void loadComicsAsync(LoadCallbackComicList callback) {
         HashMap<String, List<Comic>> map = new HashMap<>();
 
         CompletableFuture<List<Comic>> proposeFuture = CompletableFuture.supplyAsync(() -> {
@@ -41,7 +41,7 @@ public class ComicListRepository {
             return parseFinishedComicsAPI(json);
         }, executor);
 
-        CompletableFuture.allOf(proposeFuture, newFuture)
+        CompletableFuture.allOf(proposeFuture, newFuture, finishedFuture)
                 .thenAccept(v -> {
                     try {
                         map.put("proposeComics", proposeFuture.get());

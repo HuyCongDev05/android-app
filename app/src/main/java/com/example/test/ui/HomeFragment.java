@@ -35,6 +35,7 @@ public class HomeFragment extends Fragment {
 
         return root;
     }
+
     private View createComicView(Comic comic, ViewGroup parent) {
         LayoutInflater inflater = LayoutInflater.from(getContext());
         View view = inflater.inflate(R.layout.item_comic, parent, false);
@@ -56,6 +57,7 @@ public class HomeFragment extends Fragment {
 
         view.setOnClickListener(v -> {
             ComicDetailFragment detailFragment = new ComicDetailFragment();
+            requireActivity().findViewById(R.id.taskbar).setVisibility(View.GONE);
             requireActivity().getSupportFragmentManager()
                     .beginTransaction()
                     .replace(R.id.fragment_container, detailFragment)

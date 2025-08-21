@@ -32,10 +32,10 @@
     <!-- Title -->
     <ImageView
         android:id="@+id/btnBack"
-        android:layout_width="15dp"
-        android:layout_height="15dp"
+        android:layout_width="17dp"
+        android:layout_height="17dp"
         android:layout_marginStart="16dp"
-        android:layout_marginTop="32dp"
+        android:layout_marginTop="40dp"
         android:src="@drawable/icon_back"
         app:layout_constraintStart_toStartOf="@id/headerImage"
         app:layout_constraintTop_toTopOf="@id/headerImage" />
@@ -109,7 +109,6 @@
                         android:textSize="18sp" />
                 </LinearLayout>
 
-                <!-- underline -->
                 <View
                     android:id="@+id/underline"
                     android:layout_width="50dp"
@@ -117,7 +116,6 @@
                     android:layout_marginTop="0dp"
                     android:background="@drawable/underline_pink" />
 
-                <!-- description (rút ngắn) -->
                 <TextView
                     android:id="@+id/description"
                     android:layout_width="match_parent"

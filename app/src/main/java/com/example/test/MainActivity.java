@@ -15,17 +15,17 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
 
         loadFragment(new HomeFragment());
-        selectTab(R.id.icon_home, R.id.text_home);
-
-        findViewById(R.id.btn_home).setOnClickListener(v -> {
-            loadFragment(new HomeFragment());
-            selectTab(R.id.icon_home, R.id.text_home);
-        });
-
-        findViewById(R.id.btn_profile).setOnClickListener(v -> {
-            loadFragment(new ProfileFragment());
-            selectTab(R.id.icon_profile, R.id.text_profile);
-        });
+//        selectTab(R.id.icon_home, R.id.text_home);
+//
+//        findViewById(R.id.btn_home).setOnClickListener(v -> {
+//            loadFragment(new HomeFragment());
+//            selectTab(R.id.icon_home, R.id.text_home);
+//        });
+//
+//        findViewById(R.id.btn_profile).setOnClickListener(v -> {
+//            loadFragment(new ProfileFragment());
+//            selectTab(R.id.icon_profile, R.id.text_profile);
+//        });
     }
     private void loadFragment(Fragment fragment) {
         getSupportFragmentManager()
