@@ -6,7 +6,7 @@ import android.os.Looper;
 import com.example.test.repository.UsersRepository;
 
 public class RegisterService {
-    UsersRepository usersRepository = new UsersRepository();
+    private final UsersRepository usersRepository = new UsersRepository();
     private Handler mainHandler = new Handler(Looper.getMainLooper());
 
     public void CheckRegisterAsync(String userName, String password, RegisterService.RegisterCallback callback) {

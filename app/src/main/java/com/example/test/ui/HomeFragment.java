@@ -21,7 +21,7 @@ import java.util.HashMap;
 import java.util.List;
 
 public class HomeFragment extends Fragment {
-
+    public static String slug;
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater,
@@ -56,6 +56,7 @@ public class HomeFragment extends Fragment {
                 .into(imageView);
 
         view.setOnClickListener(v -> {
+            slug = comic.getSlug();
             ComicDetailFragment detailFragment = new ComicDetailFragment();
             requireActivity().findViewById(R.id.taskbar).setVisibility(View.GONE);
             requireActivity().getSupportFragmentManager()
@@ -68,7 +69,7 @@ public class HomeFragment extends Fragment {
     }
 
     public void ComicListBook(HashMap<String, List<Comic>> map, View root) {
-        // newComics
+        // lấy list truyên mới
         List<Comic> newComics = map.get("newComics");
         if (newComics != null && !newComics.isEmpty()) {
             LinearLayout comicNewListLayout = root.findViewById(R.id.ComicNewList);
@@ -78,7 +79,7 @@ public class HomeFragment extends Fragment {
             }
         }
 
-        // proposeComics
+        // lấy list truyên đã đề xuất
         List<Comic> proposeComics = map.get("proposeComics");
         if (proposeComics != null && !proposeComics.isEmpty()) {
             LinearLayout comicProposeListLayout = root.findViewById(R.id.ProposeList);
@@ -88,7 +89,7 @@ public class HomeFragment extends Fragment {
             }
         }
 
-        // finishedComics
+        // lấy list truyên đã hoàn thành
         List<Comic> finishedComics = map.get("finishedComics");
         if (finishedComics != null && !finishedComics.isEmpty()) {
             LinearLayout comicFinishedListLayout = root.findViewById(R.id.ComicFinishedList);

@@ -18,12 +18,12 @@ import androidx.appcompat.app.AppCompatActivity;
 import com.example.test.MainActivity;
 import com.example.test.R;
 import com.example.test.animation.AnimationNext;
-import com.example.test.repository.ComicListRepository;
-import com.example.test.repository.DataCache;
+import com.example.test.service.ComicListService;
 import com.example.test.service.LoginService;
 
 public class LoginUI extends AppCompatActivity {
     LoginService loginService = new LoginService();
+    ComicListService comicListService = new ComicListService();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -46,9 +46,8 @@ public class LoginUI extends AppCompatActivity {
                 runOnUiThread(() -> spinnerOverlay.setVisibility(View.VISIBLE));
                 loginService.CheckLoginAsync(emailInput.getText().toString().trim(), passwordInput.getText().toString().trim(), success -> {
                     if (success) {
-                        ComicListRepository.loadComicsAsync((successListComic, map) -> {
+                        comicListService.handleComicList().thenAccept(successListComic -> {
                             if (successListComic) {
-                                DataCache.comicMap = map;
                                 nextHomeUI();
                                 runOnUiThread(() -> spinnerOverlay.setVisibility(View.GONE));
                             }

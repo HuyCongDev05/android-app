@@ -17,7 +17,6 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
-    <!-- Gradient overlay -->
     <View
         android:id="@+id/headerOverlay"
         android:layout_width="0dp"
@@ -27,9 +26,6 @@
         app:layout_constraintStart_toStartOf="@id/headerImage"
         app:layout_constraintTop_toTopOf="@id/headerImage" />
 
-    <!-- Back button -->
-
-    <!-- Title -->
     <ImageView
         android:id="@+id/btnBack"
         android:layout_width="17dp"
@@ -55,7 +51,6 @@
         app:layout_constraintStart_toStartOf="@id/headerImage"
         app:layout_constraintTop_toBottomOf="@id/headerImage" />
 
-    <!-- Content card -->
     <androidx.cardview.widget.CardView
         android:id="@+id/contentCard"
         android:layout_width="403dp"
@@ -73,16 +68,14 @@
 
         <ScrollView
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="327dp"
             android:padding="16dp">
 
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:orientation="vertical">
-
+                android:orientation="vertical"> <!-- Tabs -->
                 <LinearLayout
-                    android:id="@+id/tabLayout"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:gravity="center_vertical"
@@ -107,27 +100,56 @@
                         android:text="Chương"
                         android:textColor="#555555"
                         android:textSize="18sp" />
-                </LinearLayout>
-
+                </LinearLayout> <!-- underline -->
                 <View
                     android:id="@+id/underline"
                     android:layout_width="50dp"
                     android:layout_height="4dp"
                     android:layout_marginTop="0dp"
                     android:background="@drawable/underline_pink" />
-
+                <TextView
+                    android:id="@+id/statusFull"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="16dp"
+                    android:text=""
+                    android:textColor="#FF2D6C"
+                    android:textSize="16sp"
+                    android:textStyle="bold" />
                 <TextView
                     android:id="@+id/description"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="6dp"
-                    android:ellipsize="end"
-                    android:lineSpacingExtra="2dp"
-                    android:maxLines="2"
-                    android:text=""
+                    android:layout_marginTop="8dp"
+                    android:lineSpacingExtra="4dp"
+                    android:text="Ba trăm năm trước, hắn là bậc đại đế, nhưng trước hôn lễ lại bị vị hôn phu giết hại. Ba trăm năm sau, hắn trùng sinh chống lại ý trời, tu luyện thần công cấm kỵ, làm chúa tể tam giới!"
                     android:textColor="#BDBDBD"
                     android:textSize="14sp" />
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="135dp"
+                    android:layout_marginTop="12dp"
+                    android:orientation="horizontal">
 
+                    <com.google.android.flexbox.FlexboxLayout
+                        android:id="@+id/tagContainer"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        app:flexWrap="wrap"
+                        app:justifyContent="flex_start" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="8dp"
+                        android:background="@drawable/chip_bg"
+                        android:paddingLeft="12dp"
+                        android:paddingTop="6dp"
+                        android:paddingRight="12dp"
+                        android:paddingBottom="6dp"
+                        android:text="Huyễn huyễn"
+                        android:textColor="#BDBDBD" />
+                </LinearLayout>
             </LinearLayout>
         </ScrollView>
     </androidx.cardview.widget.CardView>

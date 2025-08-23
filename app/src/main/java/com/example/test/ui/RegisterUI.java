@@ -36,11 +36,15 @@ public class RegisterUI extends AppCompatActivity {
         buttonRegister.setOnClickListener(v -> {
             if (!checkRegister(this, emailInput.getText().toString().trim(), passwordInput.getText().toString().trim(), checkboxAgree.isChecked())) {
                 registerService.CheckRegisterAsync(emailInput.getText().toString().trim(), passwordInput.getText().toString().trim(), success -> {
-                    if (success) {
-                        Toast.makeText(this, "Đăng ký thành công", Toast.LENGTH_SHORT).show();
-                        backToLogin();
-                    } else {
-                        Toast.makeText(this, "Tài khoản đã tồn tại", Toast.LENGTH_SHORT).show();
+                    if (!Patterns.EMAIL_ADDRESS.matcher(emailInput.getText().toString().trim()).matches()) {
+                        if (success) {
+                            Toast.makeText(this, "Đăng ký thành công", Toast.LENGTH_SHORT).show();
+                            backToLogin();
+                        } else {
+                            Toast.makeText(this, "Tài khoản đã tồn tại", Toast.LENGTH_SHORT).show();
+                        }
+                    }else {
+                        Toast.makeText(this, "Email không hợp lệ", Toast.LENGTH_SHORT).show();
                     }
                 });
             }
