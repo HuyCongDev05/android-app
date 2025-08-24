@@ -43,7 +43,7 @@ public class RegisterUI extends AppCompatActivity {
                         } else {
                             Toast.makeText(this, "Tài khoản đã tồn tại", Toast.LENGTH_SHORT).show();
                         }
-                    }else {
+                    } else {
                         Toast.makeText(this, "Email không hợp lệ", Toast.LENGTH_SHORT).show();
                     }
                 });

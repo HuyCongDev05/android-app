@@ -6,7 +6,6 @@
     android:layout_height="match_parent"
     android:background="#000000">
 
-    <!-- Header image -->
     <ImageView
         android:id="@+id/headerImage"
         android:layout_width="0dp"
@@ -66,15 +65,20 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/headerImage">
 
-        <ScrollView
+        <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="327dp"
+            android:layout_height="match_parent"
+            android:fillViewport="true"
+            android:orientation="horizontal"
             android:padding="16dp">
 
             <LinearLayout
+                android:id="@+id/detailLayout"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:orientation="vertical"> <!-- Tabs -->
+                android:orientation="vertical">
+
+                <!-- Tab -->
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
@@ -100,58 +104,79 @@
                         android:text="Chương"
                         android:textColor="#555555"
                         android:textSize="18sp" />
-                </LinearLayout> <!-- underline -->
+                </LinearLayout>
+
+                <!-- underline -->
                 <View
                     android:id="@+id/underline"
                     android:layout_width="50dp"
                     android:layout_height="4dp"
-                    android:layout_marginTop="0dp"
+                    android:layout_marginTop="2dp"
                     android:background="@drawable/underline_pink" />
+
+                <!-- Status-->
                 <TextView
-                    android:id="@+id/statusFull"
+                    android:id="@+id/status"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="16dp"
-                    android:text=""
+                    android:layout_marginTop="3dp"
                     android:textColor="#FF2D6C"
                     android:textSize="16sp"
                     android:textStyle="bold" />
-                <TextView
-                    android:id="@+id/description"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="8dp"
-                    android:lineSpacingExtra="4dp"
-                    android:text="Ba trăm năm trước, hắn là bậc đại đế, nhưng trước hôn lễ lại bị vị hôn phu giết hại. Ba trăm năm sau, hắn trùng sinh chống lại ý trời, tu luyện thần công cấm kỵ, làm chúa tể tam giới!"
-                    android:textColor="#BDBDBD"
-                    android:textSize="14sp" />
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="135dp"
-                    android:layout_marginTop="12dp"
-                    android:orientation="horizontal">
 
-                    <com.google.android.flexbox.FlexboxLayout
-                        android:id="@+id/tagContainer"
+                <!-- Nội dung chi tiết -->
+                <ScrollView
+                    android:layout_width="match_parent"
+                    android:layout_height="243dp"
+                    android:orientation="vertical"
+                    android:paddingTop="12dp">
+
+                    <ScrollView
+                        android:id="@+id/containerScroll"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        app:flexWrap="wrap"
-                        app:justifyContent="flex_start" />
+                        android:layout_marginTop="8dp"
+                        android:fillViewport="true"
+                        android:scrollbars="vertical">
 
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginStart="8dp"
-                        android:background="@drawable/chip_bg"
-                        android:paddingLeft="12dp"
-                        android:paddingTop="6dp"
-                        android:paddingRight="12dp"
-                        android:paddingBottom="6dp"
-                        android:text="Huyễn huyễn"
-                        android:textColor="#BDBDBD" />
-                </LinearLayout>
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:orientation="vertical"
+                            android:paddingTop="12dp">
+
+                            <!-- Nội dung -->
+                            <TextView
+                                android:id="@+id/content"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:lineSpacingExtra="4dp"
+                                android:textColor="#BDBDBD"
+                                android:textSize="16sp" />
+
+                            <!-- Tag list -->
+                            <com.google.android.flexbox.FlexboxLayout
+                                android:id="@+id/tagContainer"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_marginTop="8dp"
+                                android:padding="8dp"
+                                app:flexWrap="wrap"
+                                app:justifyContent="flex_start" />
+                        </LinearLayout>
+                    </ScrollView>
+                </ScrollView>
             </LinearLayout>
-        </ScrollView>
+
+            <!-- Danh sách chương -->
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/recyclerChapters"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:visibility="gone" />
+
+        </LinearLayout>
     </androidx.cardview.widget.CardView>
 
     <Button

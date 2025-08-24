@@ -17,13 +17,11 @@ public class AnimationUnderline {
         this.tabDetail = tabDetail;
         this.tabChapter = tabChapter;
 
-        underline.post(() -> setUnderline(tabDetail, false));
-
-        tabDetail.setOnClickListener(v -> setUnderline(tabDetail, true));
-        tabChapter.setOnClickListener(v -> setUnderline(tabChapter, true));
+        // ban đầu underline dưới tabDetail
+        underline.post(() -> moveTo(tabDetail, false));
     }
 
-    private void setUnderline(TextView tab, boolean animate) {
+    public void moveTo(TextView tab, boolean animate) {
         int newWidth = (int) (tab.getWidth() * shrinkRatio);
         underline.getLayoutParams().width = newWidth;
         underline.requestLayout();
@@ -38,6 +36,7 @@ public class AnimationUnderline {
         } else {
             underline.setTranslationX(targetX);
         }
+
         tabDetail.setTextColor(tab == tabDetail ? Color.WHITE : Color.parseColor("#555555"));
         tabChapter.setTextColor(tab == tabChapter ? Color.WHITE : Color.parseColor("#555555"));
     }

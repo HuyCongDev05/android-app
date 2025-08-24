@@ -22,6 +22,7 @@ import java.util.List;
 
 public class HomeFragment extends Fragment {
     public static String slug;
+
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater,

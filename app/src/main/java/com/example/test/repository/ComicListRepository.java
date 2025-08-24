@@ -32,7 +32,7 @@ public class ComicListRepository {
         }, executor);
 
         CompletableFuture<List<Comic>> newFuture = CompletableFuture.supplyAsync(() -> {
-            String json = connectAPI.getAPIComic("https://otruyenapi.com/v1/api/danh-sach/truyen-moi?page=2");
+            String json = connectAPI.getAPIComic("https://otruyenapi.com/v1/api/danh-sach/truyen-moi?page=3");
             return parseNewComicsAPI(json);
         }, executor);
 

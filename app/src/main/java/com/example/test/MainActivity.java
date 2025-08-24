@@ -6,7 +6,6 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
 
 import com.example.test.ui.HomeFragment;
-import com.example.test.ui.ProfileFragment;
 
 public class MainActivity extends AppCompatActivity {
     @Override
@@ -27,11 +26,11 @@ public class MainActivity extends AppCompatActivity {
 //            selectTab(R.id.icon_profile, R.id.text_profile);
 //        });
     }
+
     private void loadFragment(Fragment fragment) {
         getSupportFragmentManager()
                 .beginTransaction()
                 .replace(R.id.fragment_container, fragment)
                 .commit();
     }
-
 }

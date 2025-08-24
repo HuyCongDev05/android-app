@@ -16,10 +16,10 @@ public class ComicListChapterRepository {
     private static final ExecutorService executor = Executors.newFixedThreadPool(1);
     private static final ConnectAPI connectAPI = new ConnectAPI();
 
-    public static void loadComicDetailAsync(LoadCallbackComicDetail callback) {
+    public static void loadComicDetailAsync(LoadCallbackComicDetail callback, String slug) {
         CompletableFuture.supplyAsync(() -> {
             try {
-                String json = connectAPI.getAPIComic("https://otruyenapi.com/v1/api/truyen-tranh/");
+                String json = connectAPI.getAPIComic("https://otruyenapi.com/v1/api/truyen-tranh/" + slug);
                 return parseComicDetail(json);
             } catch (Exception e) {
                 throw new RuntimeException(e);
@@ -30,19 +30,25 @@ public class ComicListChapterRepository {
             return null;
         });
     }
+
     public static ComicDetail parseComicDetail(String json) {
         ComicDetail detail = new ComicDetail();
+
         JsonObject data = JsonParser.parseString(json)
                 .getAsJsonObject()
                 .getAsJsonObject("data");
 
+        // Lấy director
         detail.director = data.getAsJsonObject("seoOnPage")
                 .getAsJsonObject("seoSchema")
                 .get("director").getAsString();
 
-        detail.descriptionHead = data.getAsJsonObject("seoOnPage")
-                .get("descriptionHead").getAsString();
+        // Lấy content và bỏ thẻ <p>
+        String contentHtml = data.getAsJsonObject("item")
+                .get("content").getAsString();
+        detail.content = contentHtml.replaceAll("<p>", "").replaceAll("</p>", "");
 
+        // Lấy breadcrumbs, chỉ lấy position = 2
         detail.breadcrumbs = new ArrayList<>();
         JsonArray breadCrumbs = data.getAsJsonArray("breadCrumb");
         for (JsonElement el : breadCrumbs) {
@@ -54,9 +60,7 @@ public class ComicListChapterRepository {
             }
         }
 
-        detail.content = data.getAsJsonObject("item")
-                .get("content").getAsString();
-
+        // Lấy chapters
         detail.chapters = new ArrayList<>();
         JsonArray servers = data.getAsJsonObject("item").getAsJsonArray("chapters");
         for (JsonElement serverEl : servers) {
