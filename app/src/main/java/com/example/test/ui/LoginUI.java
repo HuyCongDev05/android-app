@@ -34,7 +34,7 @@ public class LoginUI extends AppCompatActivity {
         Button loginButton = findViewById(R.id.buttonLogin);
         TextView emailInput = findViewById(R.id.emailInput);
         TextView passwordInput = findViewById(R.id.passwordInput);
-        FrameLayout spinnerOverlay = findViewById(R.id.spinner_overlay);
+        FrameLayout spinnerOverlay = findViewById(R.id.spinner_overlay_Login);
         ImageView spinner = findViewById(R.id.spinner);
         Animation rotation = AnimationUtils.loadAnimation(this, R.anim.spinner_rotate_anim);
         spinner.startAnimation(rotation);

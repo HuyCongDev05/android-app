@@ -1,6 +1,7 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:background="#000000"
     android:padding="16dp">
 
@@ -10,7 +11,7 @@
         android:layout_width="20dp"
         android:layout_height="20dp"
         android:layout_alignParentEnd="true"
-        android:layout_marginTop="5dp"
+        android:layout_marginTop="13dp"
         android:layout_marginEnd="20dp"
         android:src="@drawable/icon_search" />
 
@@ -18,12 +19,13 @@
         android:id="@+id/titlePropose"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_marginTop="5dp"
         android:layout_toStartOf="@id/iconSearch"
         android:ellipsize="end"
         android:fontFamily="@font/oswald"
         android:singleLine="true"
         android:text="@string/ComicPropose_prompt"
-        android:textColor="#FFFFFF"
+        android:textColor="#FF4D8C"
         android:textSize="22sp"
         android:textStyle="bold" />
 
@@ -54,7 +56,7 @@
         android:fontFamily="@font/oswald"
         android:singleLine="true"
         android:text="@string/ComicNew_prompt"
-        android:textColor="#FFFFFF"
+        android:textColor="#FF4D8C"
         android:textSize="22sp"
         android:textStyle="bold" />
 
@@ -85,7 +87,7 @@
         android:fontFamily="@font/oswald"
         android:singleLine="true"
         android:text="@string/ComicFinished_prompt"
-        android:textColor="#FFFFFF"
+        android:textColor="#FF4D8C"
         android:textSize="22sp"
         android:textStyle="bold" />
 
@@ -104,4 +106,5 @@
             android:layout_height="wrap_content"
             android:orientation="horizontal" />
     </HorizontalScrollView>
+
 </RelativeLayout>

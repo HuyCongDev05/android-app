@@ -7,6 +7,9 @@ import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.animation.Animation;
+import android.view.animation.AnimationUtils;
+import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.ScrollView;
@@ -14,7 +17,9 @@ import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.core.content.ContextCompat;
 import androidx.fragment.app.Fragment;
+import androidx.recyclerview.widget.DividerItemDecoration;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -26,10 +31,78 @@ import com.example.test.service.ComicListChapterService;
 import com.google.android.flexbox.FlexboxLayout;
 
 import java.util.List;
+import java.util.Objects;
 
 public class ComicDetailFragment extends Fragment {
     FlexboxLayout tagContainer;
     String slug = HomeFragment.slug;
+    String nameComic = HomeFragment.nameComic;
+
+    @Nullable
+    @Override
+    public View onCreateView(@NonNull LayoutInflater inflater,
+                             @Nullable ViewGroup container,
+                             @Nullable Bundle savedInstanceState) {
+        View view = inflater.inflate(R.layout.activity_detail_comic, container, false);
+
+        TextView tabDetail = view.findViewById(R.id.tabDetail);
+        TextView tabChapter = view.findViewById(R.id.tabChapter);
+        TextView ComicName = view.findViewById(R.id.nameComic);
+        View underline = view.findViewById(R.id.underline);
+        LinearLayout layoutDetail = view.findViewById(R.id.detailLayout);
+        ScrollView containerScroll = view.findViewById(R.id.containerScroll);
+        RecyclerView recyclerChapters = view.findViewById(R.id.recyclerChapters);
+        tagContainer = view.findViewById(R.id.tagContainer);
+        TextView content = view.findViewById(R.id.content);
+        TextView status = view.findViewById(R.id.status);
+        ComicName.setText(nameComic);
+        AnimationUnderline animation = new AnimationUnderline(underline, tabDetail, tabChapter);
+        ComicListChapterService service = new ComicListChapterService();
+
+        service.getComicDetail(slug, new LoadCallbackComicDetail() {
+            @Override
+            public void onLoadSuccess(ComicDetail comicDetail) {
+
+                status.setText("Đang cập nhật");
+                content.setText(comicDetail.content);
+                addTags(requireContext(), tagContainer, comicDetail.breadcrumbs);
+                setupChapterRecycler(recyclerChapters, comicDetail.chapters, requireContext());
+                makeExpandable(content, containerScroll, 3, " Xem thêm", " Thu gọn");
+            }
+
+            @Override
+            public void onLoadFailed(Throwable error) {
+            }
+        });
+
+        tabDetail.setOnClickListener(v -> {
+            layoutDetail.setVisibility(View.VISIBLE);
+            recyclerChapters.setVisibility(View.GONE);
+
+            tabDetail.setTextColor(Color.WHITE);
+            tabChapter.setTextColor(Color.GRAY);
+
+            animation.moveTo(tabDetail, true);
+        });
+
+        tabChapter.setOnClickListener(v -> {
+            layoutDetail.setVisibility(View.GONE);
+            recyclerChapters.setVisibility(View.VISIBLE);
+
+            tabChapter.setTextColor(Color.WHITE);
+            tabDetail.setTextColor(Color.GRAY);
+
+            animation.moveTo(tabChapter, true);
+        });
+
+        ImageView btnBack = view.findViewById(R.id.btnBack);
+        btnBack.setOnClickListener(v -> {
+            requireActivity().findViewById(R.id.taskbar).setVisibility(View.VISIBLE);
+            requireActivity().getSupportFragmentManager().popBackStack();
+        });
+
+        return view;
+    }
 
     public static void addTags(Context context, FlexboxLayout container, List<ComicDetail.Breadcrumb> tags) {
         container.removeAllViews();
@@ -39,7 +112,7 @@ public class ComicDetailFragment extends Fragment {
             textView.setText(tag.getName());
             textView.setTextColor(Color.parseColor("#BDBDBD"));
             textView.setBackgroundResource(R.drawable.chip_bg);
-            textView.setPadding(24, 12, 24, 12);
+            textView.setPadding(12, 12, 12, 12);
 
             // Nếu tag quá dài thì cắt
             textView.setSingleLine(true);
@@ -63,7 +136,6 @@ public class ComicDetailFragment extends Fragment {
 
         // 2. Tạo Adapter
         RecyclerView.Adapter adapter = new RecyclerView.Adapter<>() {
-
             @NonNull
             @Override
             public RecyclerView.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
@@ -75,6 +147,7 @@ public class ComicDetailFragment extends Fragment {
             public void onBindViewHolder(@NonNull RecyclerView.ViewHolder holder, int position) {
                 ChapterViewHolder vh = (ChapterViewHolder) holder;
                 vh.tvChapterName.setText("Chapter " + chapters.get(position).getChapterName());
+                vh.tvChapterName.setTextColor(Color.WHITE);
             }
 
             @Override
@@ -91,83 +164,25 @@ public class ComicDetailFragment extends Fragment {
                 }
             }
         };
+
         // 3. Gán Adapter
         recyclerChapters.setAdapter(adapter);
 
         // 4. Hiển thị RecyclerView
         recyclerChapters.setVisibility(View.VISIBLE);
-    }
 
-    @Nullable
-    @Override
-    public View onCreateView(@NonNull LayoutInflater inflater,
-                             @Nullable ViewGroup container,
-                             @Nullable Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.activity_detail_comic, container, false);
+        // 5. Thêm gạch chân chapter
+        DividerItemDecoration divider = new DividerItemDecoration(context, DividerItemDecoration.VERTICAL);
+        divider.setDrawable(Objects.requireNonNull(ContextCompat.getDrawable(context, R.drawable.divider_gray)));
+        recyclerChapters.addItemDecoration(divider);
 
-        TextView tabDetail = view.findViewById(R.id.tabDetail);
-        TextView tabChapter = view.findViewById(R.id.tabChapter);
-        View underline = view.findViewById(R.id.underline);
-        LinearLayout layoutDetail = view.findViewById(R.id.detailLayout);
-        ScrollView containerScroll = view.findViewById(R.id.containerScroll);
-        RecyclerView recyclerChapters = view.findViewById(R.id.recyclerChapters);
-        tagContainer = view.findViewById(R.id.tagContainer);
-        TextView content = view.findViewById(R.id.content);
-        TextView status = view.findViewById(R.id.status);
-        AnimationUnderline animation = new AnimationUnderline(underline, tabDetail, tabChapter);
-
-        ComicListChapterService service = new ComicListChapterService();
-
-        service.getComicDetail(slug, new LoadCallbackComicDetail() {
-            @Override
-            public void onLoadSuccess(ComicDetail comicDetail) {
-                status.setText("Đang cập nhật");
-                content.setText(comicDetail.content);
-                addTags(requireContext(), tagContainer, comicDetail.breadcrumbs);
-                setupChapterRecycler(recyclerChapters, comicDetail.chapters, requireContext());
-                makeExpandable(content, containerScroll, 3, " Xem thêm", " Thu gọn");
-            }
-
-            @Override
-            public void onLoadFailed(Throwable error) {
-            }
-        });
-
-        tabDetail.setOnClickListener(v -> {
-            layoutDetail.setVisibility(View.VISIBLE);
-            recyclerChapters.setVisibility(View.GONE);
-            animation.moveTo(tabDetail, true);
-
-            tabDetail.setTextColor(Color.WHITE);
-            tabChapter.setTextColor(Color.GRAY);
-        });
-
-        tabChapter.setOnClickListener(v -> {
-            layoutDetail.setVisibility(View.GONE);
-            recyclerChapters.setVisibility(View.VISIBLE);
-            animation.moveTo(tabChapter, true);
-
-            tabChapter.setTextColor(Color.WHITE);
-            tabDetail.setTextColor(Color.GRAY);
-        });
-
-        ImageView btnBack = view.findViewById(R.id.btnBack);
-        btnBack.setOnClickListener(v -> {
-            requireActivity().findViewById(R.id.taskbar).setVisibility(View.VISIBLE);
-            requireActivity().getSupportFragmentManager().popBackStack();
-        });
-
-        return view;
     }
 
     private void makeExpandable(TextView textView, ScrollView containerScroll,
                                 int maxLines, String expandText, String collapseText) {
         textView.post(() -> {
             int lineCount = textView.getLineCount();
-            if (lineCount <= maxLines) {
-                // Không cần nút xem thêm nếu ít hơn maxLines
-                return;
-            }
+            if (lineCount <= maxLines) return;
 
             // Ban đầu thu gọn
             textView.setMaxLines(maxLines);
@@ -196,5 +211,4 @@ public class ComicDetailFragment extends Fragment {
                     ((LinearLayout) textView.getParent()).indexOfChild(textView) + 1);
         });
     }
-
 }

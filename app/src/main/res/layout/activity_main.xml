@@ -1,5 +1,4 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="#000000">
@@ -15,6 +14,7 @@
         android:layout_width="match_parent"
         android:layout_height="70dp"
         android:layout_alignParentBottom="true"
+        android:layout_marginBottom="2dp"
         android:background="#111111"
         android:gravity="center"
         android:orientation="horizontal">
@@ -38,8 +38,7 @@
                     android:id="@+id/icon_home"
                     android:layout_width="24dp"
                     android:layout_height="24dp"
-                    android:src="@drawable/icon_home"
-                    app:tint="#FFF" />
+                    android:src="@drawable/icon_home" />
 
                 <TextView
                     android:id="@+id/text_home"
@@ -62,8 +61,7 @@
                     android:id="@+id/icon_follow"
                     android:layout_width="24dp"
                     android:layout_height="24dp"
-                    android:src="@drawable/icon_follow"
-                    app:tint="#FFF" />
+                    android:src="@drawable/icon_follow" />
 
                 <TextView
                     android:id="@+id/text_follow"
@@ -86,8 +84,7 @@
                     android:id="@+id/icon_category"
                     android:layout_width="24dp"
                     android:layout_height="24dp"
-                    android:src="@drawable/icon_category"
-                    app:tint="#FFF" />
+                    android:src="@drawable/icon_category" />
 
                 <TextView
                     android:id="@+id/text_category"
@@ -110,8 +107,7 @@
                     android:id="@+id/icon_notify"
                     android:layout_width="24dp"
                     android:layout_height="24dp"
-                    android:src="@drawable/icon_notify"
-                    app:tint="#FFF" />
+                    android:src="@drawable/icon_notify" />
 
                 <TextView
                     android:id="@+id/text_notify"
@@ -134,8 +130,7 @@
                     android:id="@+id/icon_profile"
                     android:layout_width="24dp"
                     android:layout_height="24dp"
-                    android:src="@drawable/icon_settings"
-                    app:tint="#FFF" />
+                    android:src="@drawable/icon_profile" />
 
                 <TextView
                     android:id="@+id/text_profile"
