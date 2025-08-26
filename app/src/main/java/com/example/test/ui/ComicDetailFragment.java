@@ -1,6 +1,7 @@
 package com.example.test.ui;
 
 import android.content.Context;
+import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.text.TextUtils;
@@ -195,7 +196,8 @@ public class ComicDetailFragment extends Fragment {
         });
 
         btnViewStart.setOnClickListener(v -> {
-
+            Intent intent = new Intent(requireContext(), ChapterUI.class);
+            startActivity(intent);
         });
 
         ImageView btnBack = view.findViewById(R.id.btnBack);
