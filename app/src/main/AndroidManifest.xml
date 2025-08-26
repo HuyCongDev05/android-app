@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     package="com.example.test">
 
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
@@ -20,7 +21,25 @@
 
         <activity android:name=".ui.RegisterUI" />
         <activity android:name=".MainActivity" />
-        <activity android:name=".ui.HomeFragment" />
+        <activity
+            android:name=".ui.HomeFragment"
+            tools:ignore="Instantiatable" />
+        <activity
+            android:name=".ui.CategoryFragment"
+            tools:ignore="Instantiatable" />
+        <activity
+            android:name=".ui.ComicDetailFragment"
+            tools:ignore="Instantiatable" />
+        <activity
+            android:name=".ui.FollowFragment"
+            tools:ignore="Instantiatable" />
+        <activity
+            android:name=".ui.NotifyFragment"
+            tools:ignore="Instantiatable" />
+        <activity
+            android:name=".ui.ProfileFragment"
+            tools:ignore="Instantiatable" />
+
 
         <activity
             android:name=".ui.LoginUI"

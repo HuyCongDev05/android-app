@@ -23,6 +23,7 @@ import java.util.List;
 public class HomeFragment extends Fragment {
     public static String slug;
     public static String nameComic;
+    public static String urlComic;
 
     @Nullable
     @Override
@@ -60,6 +61,7 @@ public class HomeFragment extends Fragment {
         view.setOnClickListener(v -> {
             nameComic = comic.getName();
             slug = comic.getSlug();
+            urlComic = comic.getImageUrl();
             ComicDetailFragment detailFragment = new ComicDetailFragment();
             requireActivity().findViewById(R.id.taskbar).setVisibility(View.GONE);
             requireActivity().getSupportFragmentManager()

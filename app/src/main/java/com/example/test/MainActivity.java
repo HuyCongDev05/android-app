@@ -8,7 +8,10 @@ import android.widget.TextView;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
 
+import com.example.test.ui.CategoryFragment;
+import com.example.test.ui.FollowFragment;
 import com.example.test.ui.HomeFragment;
+import com.example.test.ui.NotifyFragment;
 import com.example.test.ui.ProfileFragment;
 
 public class MainActivity extends AppCompatActivity {
@@ -26,17 +29,17 @@ public class MainActivity extends AppCompatActivity {
         });
 
         findViewById(R.id.btn_follow).setOnClickListener(v -> {
-            loadFragment(new HomeFragment());
+            loadFragment(new FollowFragment());
             selectTab(R.id.icon_follow, R.id.text_follow);
         });
 
         findViewById(R.id.btn_category).setOnClickListener(v -> {
-            loadFragment(new HomeFragment());
+            loadFragment(new CategoryFragment());
             selectTab(R.id.icon_category, R.id.text_category);
         });
 
         findViewById(R.id.btn_notify).setOnClickListener(v -> {
-            loadFragment(new HomeFragment());
+            loadFragment(new NotifyFragment());
             selectTab(R.id.icon_notify, R.id.text_notify);
         });
 
