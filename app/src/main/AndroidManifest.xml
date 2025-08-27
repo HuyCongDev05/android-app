@@ -39,7 +39,9 @@
         <activity
             android:name=".ui.ProfileFragment"
             tools:ignore="Instantiatable" />
-
+        <activity
+            android:name=".ui.ChapterUI"
+            tools:ignore="Instantiatable" />
 
         <activity
             android:name=".ui.LoginUI"

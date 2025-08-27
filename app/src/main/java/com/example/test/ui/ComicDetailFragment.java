@@ -23,6 +23,7 @@ import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.DividerItemDecoration;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
+import androidx.recyclerview.widget.RecyclerView.Adapter;
 
 import com.bumptech.glide.Glide;
 import com.example.test.R;
@@ -71,8 +72,7 @@ public class ComicDetailFragment extends Fragment {
         //  Gán LayoutManager
         recyclerChapters.setLayoutManager(new LinearLayoutManager(context));
 
-        //  Tạo Adapter
-        RecyclerView.Adapter adapter = new RecyclerView.Adapter<>() {
+        Adapter<RecyclerView.ViewHolder> adapter = new Adapter<>() {
             @NonNull
             @Override
             public RecyclerView.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
@@ -83,8 +83,16 @@ public class ComicDetailFragment extends Fragment {
             @Override
             public void onBindViewHolder(@NonNull RecyclerView.ViewHolder holder, int position) {
                 ChapterViewHolder vh = (ChapterViewHolder) holder;
+
+                // Set tên chapter
                 vh.tvChapterName.setText("Chapter " + chapters.get(position).getChapterName());
                 vh.tvChapterName.setTextColor(Color.WHITE);
+
+                // Xử lý click
+                vh.itemView.setOnClickListener((View v) -> v.postDelayed(() -> {
+                    Intent intent = new Intent(context, ChapterUI.class);
+                    context.startActivity(intent);
+                }, 100));
             }
 
             @Override
@@ -112,7 +120,6 @@ public class ComicDetailFragment extends Fragment {
         DividerItemDecoration divider = new DividerItemDecoration(context, DividerItemDecoration.VERTICAL);
         divider.setDrawable(Objects.requireNonNull(ContextCompat.getDrawable(context, R.drawable.divider_gray)));
         recyclerChapters.addItemDecoration(divider);
-
     }
 
     @Nullable
@@ -189,10 +196,15 @@ public class ComicDetailFragment extends Fragment {
 
             animation.moveTo(tabChapter, true);
         });
+        final boolean[] isFollowing = {false};
 
         btnFollow.setOnClickListener(v -> {
-
-            btnFollow.setText("Đang theo dõi");
+            isFollowing[0] = !isFollowing[0];
+            if (isFollowing[0]) {
+                btnFollow.setText("Đang theo dõi");
+            } else {
+                btnFollow.setText("Theo dõi");
+            }
         });
 
         btnViewStart.setOnClickListener(v -> {
