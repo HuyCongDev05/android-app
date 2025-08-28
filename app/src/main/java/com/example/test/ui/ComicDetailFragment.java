@@ -37,6 +37,7 @@ import java.util.List;
 import java.util.Objects;
 
 public class ComicDetailFragment extends Fragment {
+    public static String chapterName;
     FlexboxLayout tagContainer;
     String slug = HomeFragment.slug;
     String nameComic = HomeFragment.nameComic;
@@ -90,6 +91,7 @@ public class ComicDetailFragment extends Fragment {
 
                 // Xử lý click
                 vh.itemView.setOnClickListener((View v) -> v.postDelayed(() -> {
+                    chapterName = vh.tvChapterName.getText().toString();
                     Intent intent = new Intent(context, ChapterUI.class);
                     context.startActivity(intent);
                 }, 100));

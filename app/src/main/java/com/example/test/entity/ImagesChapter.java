@@ -4,6 +4,7 @@ import java.util.List;
 
 public class ImagesChapter {
     private List<images> images;
+
     public static class images {
         private String imagePage;
         private String imageFile;
