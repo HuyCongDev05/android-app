@@ -24,6 +24,14 @@ public class ComicDetail {
         public String getSlug() {
             return slug;
         }
+
+        @Override
+        public String toString() {
+            return "Breadcrumb{" +
+                    "name='" + name + '\'' +
+                    ", slug='" + slug + '\'' +
+                    '}';
+        }
     }
 
     public static class Chapter {
@@ -50,5 +58,23 @@ public class ComicDetail {
         public void setChapterName(String chapterName) {
             this.chapterName = chapterName;
         }
+
+        @Override
+        public String toString() {
+            return "Chapter{" +
+                    "chapterName='" + chapterName + '\'' +
+                    ", chapterApiData='" + chapterApiData + '\'' +
+                    '}';
+        }
+    }
+
+    @Override
+    public String toString() {
+        return "ComicDetail{" +
+                "director='" + director + '\'' +
+                ", breadcrumbs=" + breadcrumbs +
+                ", content='" + content + '\'' +
+                ", chapters=" + chapters +
+                '}';
     }
 }

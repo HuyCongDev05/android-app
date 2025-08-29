@@ -7,6 +7,8 @@ import com.example.test.entity.ComicDetail;
 import com.example.test.repository.ComicListChapterRepository;
 import com.example.test.repository.LoadCallbackComicDetail;
 
+import java.util.List;
+
 public class ComicListChapterService {
 
     public void getComicDetail(String slug, LoadCallbackComicDetail callback) {

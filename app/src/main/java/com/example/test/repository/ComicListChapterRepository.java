@@ -73,6 +73,7 @@ public class ComicListChapterRepository {
                 detail.chapters.add(new ComicDetail.Chapter(chapterName, chapterApi));
             }
         }
+        ImagesChapterRepository.chapters = detail.chapters;
         return detail;
     }
 }
