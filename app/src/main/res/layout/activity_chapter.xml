@@ -1,11 +1,11 @@
-<?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="#000000">
 
-    <!-- Top bar -->
+    <!-- Top bar giữ nguyên -->
     <LinearLayout
         android:id="@+id/topBar"
         android:layout_width="0dp"
@@ -18,9 +18,6 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
 
-        <!-- Nút back -->
-
-        <!-- Tiêu đề Chapter -->
         <ImageView
             android:id="@+id/btnBack"
             android:layout_width="20dp"
@@ -40,7 +37,7 @@
             android:textStyle="bold" />
     </LinearLayout>
 
-    <!-- Danh sách ảnh -->
+    <!-- RecyclerView ảnh full width, chiều cao wrap theo ảnh -->
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/recyclerImages"
         android:layout_width="0dp"
@@ -48,12 +45,12 @@
         android:overScrollMode="never"
         android:scrollbars="none"
         app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+        app:layout_constraintTop_toBottomOf="@id/topBar"
         app:layout_constraintBottom_toTopOf="@id/bottomBar"
-        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/topBar" />
+        app:layout_constraintEnd_toEndOf="parent"/>
 
-    <!-- Bottom nav -->
+    <!-- Bottom bar giữ nguyên -->
     <LinearLayout
         android:id="@+id/bottomBar"
         android:layout_width="0dp"
@@ -67,7 +64,6 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent">
 
-        <!-- Menu -->
         <ImageView
             android:id="@+id/btnNavMenu"
             android:layout_width="28dp"
@@ -90,6 +86,6 @@
             android:layout_marginEnd="24dp"
             android:src="@drawable/icon_next_chapter"
             app:tint="@android:color/white" />
-
     </LinearLayout>
+
 </androidx.constraintlayout.widget.ConstraintLayout>

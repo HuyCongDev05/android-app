@@ -1,13 +1,12 @@
 package com.example.test.service;
 
-
 import com.example.test.repository.ImagesChapterRepository;
-
-import java.util.Map;
+import com.example.test.repository.LoadCallBackImages;
 
 public class ChapterComicService {
-    public Map<String, String> handleImagesChapterComic(String chapterName) {
-        ImagesChapterRepository.loadImagesChapterAsync(chapterName);
-        return ImagesChapterRepository.linkImages;
+
+    public void handleImagesChapterComic(String chapterName, LoadCallBackImages callback) {
+        ImagesChapterRepository.loadImagesChapterAsync(chapterName, callback);
     }
 }
+
