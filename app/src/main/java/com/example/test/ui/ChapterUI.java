@@ -32,6 +32,7 @@ public class ChapterUI extends AppCompatActivity {
         ChapterComicService service = new ChapterComicService();
         service.handleImagesChapterComic(chapter, this::loadImages);
     }
+
     public void loadImages(List<String> imageUrls) {
         RecyclerView recyclerView = findViewById(R.id.recyclerImages);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));

@@ -11,41 +11,39 @@ import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
 
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 import java.util.concurrent.CompletableFuture;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 
 public class ImagesChapterRepository {
-    public static List<ComicDetail.Chapter> chapters;
     private static final ExecutorService executor = Executors.newFixedThreadPool(1);
     private final static ConnectAPI connectAPI = new ConnectAPI();
+    public static List<ComicDetail.Chapter> chapters;
 
-        public static void loadImagesChapterAsync(String chapterName, LoadCallBackImages callback) {
-            CompletableFuture.supplyAsync(() -> {
-                List<String> linkImages = new ArrayList<>();
-                try {
-                    for (ComicDetail.Chapter chapter : chapters) {
-                        if (chapter.getChapterName().equals(chapterName)) {
-                            String json = connectAPI.getAPIComic(chapter.getChapterApiData());
-                            linkImages = handleImagesChapter(json);
-                            break;
-                        }
+    public static void loadImagesChapterAsync(String chapterName, LoadCallBackImages callback) {
+        CompletableFuture.supplyAsync(() -> {
+            List<String> linkImages = new ArrayList<>();
+            try {
+                for (ComicDetail.Chapter chapter : chapters) {
+                    if (chapter.getChapterName().equals(chapterName)) {
+                        String json = connectAPI.getAPIComic(chapter.getChapterApiData());
+                        linkImages = handleImagesChapter(json);
+                        break;
                     }
-                } catch (Exception e) {
-                    e.printStackTrace();
                 }
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
 
-                List<String> finalLinkImages = linkImages;
-                new Handler(Looper.getMainLooper()).post(() -> {
-                    if (callback != null) callback.onLoadSuccess(finalLinkImages);
-                });
+            List<String> finalLinkImages = linkImages;
+            new Handler(Looper.getMainLooper()).post(() -> {
+                if (callback != null) callback.onLoadSuccess(finalLinkImages);
+            });
 
-                return null;
-            }, executor);
-        }
+            return null;
+        }, executor);
+    }
 
 
     public static List<String> handleImagesChapter(String json) {

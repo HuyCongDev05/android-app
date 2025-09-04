@@ -8,6 +8,16 @@ public class ComicDetail {
     public String content;
     public List<Chapter> chapters;
 
+    @Override
+    public String toString() {
+        return "ComicDetail{" +
+                "director='" + director + '\'' +
+                ", breadcrumbs=" + breadcrumbs +
+                ", content='" + content + '\'' +
+                ", chapters=" + chapters +
+                '}';
+    }
+
     public static class Breadcrumb {
         String name;
         String slug;
@@ -66,15 +76,5 @@ public class ComicDetail {
                     ", chapterApiData='" + chapterApiData + '\'' +
                     '}';
         }
-    }
-
-    @Override
-    public String toString() {
-        return "ComicDetail{" +
-                "director='" + director + '\'' +
-                ", breadcrumbs=" + breadcrumbs +
-                ", content='" + content + '\'' +
-                ", chapters=" + chapters +
-                '}';
     }
 }
