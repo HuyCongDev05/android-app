@@ -16,6 +16,8 @@ import com.bumptech.glide.Glide;
 import com.example.test.R;
 import com.example.test.entity.Comic;
 import com.example.test.repository.DataCache;
+import com.example.test.repository.UsersRepository;
+import com.example.test.service.FollowComicService;
 
 import java.util.HashMap;
 import java.util.List;
@@ -24,6 +26,7 @@ public class HomeFragment extends Fragment {
     public static String slug;
     public static String nameComic;
     public static String urlComic;
+
 
     @Nullable
     @Override
@@ -35,6 +38,8 @@ public class HomeFragment extends Fragment {
         if (DataCache.comicMap != null) {
             ComicListBook(DataCache.comicMap, root);
         }
+        FollowComicService followComicService = new FollowComicService();
+        followComicService.getFollowComic(UsersRepository.userId);
 
         return root;
     }

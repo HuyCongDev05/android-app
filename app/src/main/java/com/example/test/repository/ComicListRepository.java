@@ -16,12 +16,10 @@ import java.util.concurrent.CompletableFuture;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 
-
 public class ComicListRepository {
     private static final ExecutorService executor = Executors.newFixedThreadPool(3);
     private static final Handler mainHandler = new Handler(Looper.getMainLooper());
     private static final ConnectAPI connectAPI = new ConnectAPI();
-
 
     public static void loadComicsAsync(LoadCallbackComicList callback) {
         HashMap<String, List<Comic>> map = new HashMap<>();
@@ -54,7 +52,6 @@ public class ComicListRepository {
                     }
                 });
     }
-
 
     // danh sách đề xuất
     private static List<Comic> parseHomeAPI(String json) {

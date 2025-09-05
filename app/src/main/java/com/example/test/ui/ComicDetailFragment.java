@@ -42,6 +42,7 @@ public class ComicDetailFragment extends Fragment {
     String slug = HomeFragment.slug;
     String nameComic = HomeFragment.nameComic;
     String urlComic = HomeFragment.urlComic;
+    public static List<String> listFollowComic;
 
     public static void addTags(Context context, FlexboxLayout container, List<ComicDetail.Breadcrumb> tags) {
         container.removeAllViews();
@@ -169,7 +170,7 @@ public class ComicDetailFragment extends Fragment {
                 content.setText(comicDetail.content);
                 addTags(requireContext(), tagContainer, comicDetail.breadcrumbs);
                 setupChapterRecycler(recyclerChapters, comicDetail.chapters, requireContext());
-                makeExpandable(content, containerScroll, 3, " Xem thêm", " Thu gọn");
+                makeExpandable(content, containerScroll);
             }
 
             @Override
@@ -198,16 +199,28 @@ public class ComicDetailFragment extends Fragment {
 
             animation.moveTo(tabChapter, true);
         });
-        final boolean[] isFollowing = {false};
+
+        final boolean[] isFollowing = new boolean[1];
+
+        if (listFollowComic.contains(slug)) {
+            isFollowing[0] = true;
+            btnFollow.setText("Đang theo dõi");
+        } else {
+            isFollowing[0] = false;
+            btnFollow.setText("Theo dõi");
+        }
 
         btnFollow.setOnClickListener(v -> {
-            isFollowing[0] = !isFollowing[0];
             if (isFollowing[0]) {
-                btnFollow.setText("Đang theo dõi");
-            } else {
+                isFollowing[0] = false;
                 btnFollow.setText("Theo dõi");
+
+            } else {
+                isFollowing[0] = true;
+                btnFollow.setText("Đang theo dõi");
             }
         });
+
 
         btnViewStart.setOnClickListener(v -> {
             Intent intent = new Intent(requireContext(), ChapterUI.class);
@@ -223,30 +236,29 @@ public class ComicDetailFragment extends Fragment {
         return view;
     }
 
-    private void makeExpandable(TextView textView, ScrollView containerScroll,
-                                int maxLines, String expandText, String collapseText) {
+    private void makeExpandable(TextView textView, ScrollView containerScroll) {
         textView.post(() -> {
             int lineCount = textView.getLineCount();
-            if (lineCount <= maxLines) return;
+            if (lineCount <= 3) return;
 
             // Ban đầu thu gọn
-            textView.setMaxLines(maxLines);
+            textView.setMaxLines(3);
             textView.setEllipsize(TextUtils.TruncateAt.END);
 
             // Tạo TextView nút toggle
             TextView toggleView = new TextView(textView.getContext());
-            toggleView.setText(expandText);
+            toggleView.setText(" Xem thêm");
             toggleView.setTextColor(Color.parseColor("#FF2D6C"));
             toggleView.setPadding(0, 8, 0, 0);
             toggleView.setOnClickListener(v -> {
-                if (textView.getMaxLines() == maxLines) {
+                if (textView.getMaxLines() == 3) {
                     textView.setMaxLines(Integer.MAX_VALUE);
                     textView.setEllipsize(null);
-                    toggleView.setText(collapseText);
+                    toggleView.setText(" Thu gọn");
                 } else {
-                    textView.setMaxLines(maxLines);
+                    textView.setMaxLines(3);
                     textView.setEllipsize(TextUtils.TruncateAt.END);
-                    toggleView.setText(expandText);
+                    toggleView.setText(" Xem thêm");
                     containerScroll.fullScroll(View.FOCUS_UP); // đưa scroll về trên khi thu gọn
                 }
             });

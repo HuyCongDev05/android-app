@@ -3,6 +3,7 @@ package com.example.test.service;
 import com.example.test.repository.FollowComicRepository;
 import com.example.test.repository.GetFollowComicRepository;
 import com.example.test.repository.LoadCallBackFollowComicList;
+import com.example.test.ui.ComicDetailFragment;
 
 import java.util.List;
 
@@ -19,7 +20,7 @@ public class FollowComicService {
         GetFollowComicRepository.loadComicDetailAsync(userId, new LoadCallBackFollowComicList() {
             @Override
             public void onSuccess(List<String> comics) {
-                comics.forEach(System.out::println);
+                ComicDetailFragment.listFollowComic.addAll(comics);
             }
 
             @Override
