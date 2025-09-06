@@ -16,8 +16,6 @@ import com.bumptech.glide.Glide;
 import com.example.test.R;
 import com.example.test.entity.Comic;
 import com.example.test.repository.DataCache;
-import com.example.test.repository.UsersRepository;
-import com.example.test.service.FollowComicService;
 
 import java.util.HashMap;
 import java.util.List;
@@ -38,8 +36,6 @@ public class HomeFragment extends Fragment {
         if (DataCache.comicMap != null) {
             ComicListBook(DataCache.comicMap, root);
         }
-        FollowComicService followComicService = new FollowComicService();
-        followComicService.getFollowComic(UsersRepository.userId);
 
         return root;
     }
@@ -71,6 +67,7 @@ public class HomeFragment extends Fragment {
             requireActivity().findViewById(R.id.taskbar).setVisibility(View.GONE);
             requireActivity().getSupportFragmentManager()
                     .beginTransaction()
+                    .setReorderingAllowed(false) // tắt tối ưu hóa
                     .replace(R.id.fragment_container, detailFragment)
                     .addToBackStack(null)
                     .commit();

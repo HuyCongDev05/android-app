@@ -1,24 +1,47 @@
 package com.example.test.repository;
 
-import com.example.test.entity.FollowComic;
-import com.google.gson.Gson;
+import com.example.test.config.ConnectAPI;
+import com.google.gson.JsonObject;
+import com.google.gson.JsonParser;
 
-import java.io.BufferedReader;
-import java.io.InputStreamReader;
-import java.io.OutputStream;
-import java.net.HttpURLConnection;
-import java.net.URL;
 import java.util.concurrent.CompletableFuture;
 import java.util.concurrent.Executor;
-import java.util.function.Consumer;
 
 public class FollowComicRepository {
     private static final Executor executor = java.util.concurrent.Executors.newFixedThreadPool(4);
-    private static final Gson gson = new Gson();
+    private static final ConnectAPI connectAPI = new ConnectAPI();
 
-    public static void loadComicDetailAsync(String userId, String slug,
-                                            Consumer<String> onSuccess,
-                                            Consumer<Exception> onError) {
+    public static CompletableFuture<Boolean> loadFollowComicAsync(String userId, String slug) {
+        String jsonData = String.format(
+                "{\"userId\":\"%s\",\"slug\":\"%s\"}",
+                userId, slug
+        );
 
+        return CompletableFuture.supplyAsync(() -> {
+            try {
+                String json = connectAPI.postAPI("http://10.0.2.2:8080/api/comic/follow", jsonData);
+                JsonObject resObj = JsonParser.parseString(json).getAsJsonObject();
+                String status = resObj.get("status").getAsString();
+                return "success".equalsIgnoreCase(status);
+            } catch (Exception e) {
+                System.out.println("Lỗi" + e.getMessage());
+                return false;
+            }
+        }, executor);
+    }
+
+    public static void loadUnFollowComicAsync(String userId, String slug) {
+        String jsonData = String.format(
+                "{\"userId\":\"%s\",\"slug\":\"%s\"}",
+                userId, slug
+        );
+
+        CompletableFuture.runAsync(() -> {
+            try {
+                connectAPI.postAPI("http://10.0.2.2:8080/api/comic/unfollow", jsonData);
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        }, executor);
     }
 }

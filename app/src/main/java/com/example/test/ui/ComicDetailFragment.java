@@ -31,18 +31,22 @@ import com.example.test.animation.AnimationUnderline;
 import com.example.test.entity.ComicDetail;
 import com.example.test.repository.LoadCallbackComicDetail;
 import com.example.test.service.ComicListChapterService;
+import com.example.test.service.FollowComicService;
+import com.example.test.service.LoginService;
 import com.google.android.flexbox.FlexboxLayout;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
 public class ComicDetailFragment extends Fragment {
     public static String chapterName;
+    public static String userId;
+    public static List<String> listFollowComic = new ArrayList<>();
     FlexboxLayout tagContainer;
     String slug = HomeFragment.slug;
     String nameComic = HomeFragment.nameComic;
     String urlComic = HomeFragment.urlComic;
-    public static List<String> listFollowComic;
 
     public static void addTags(Context context, FlexboxLayout container, List<ComicDetail.Breadcrumb> tags) {
         container.removeAllViews();
@@ -148,6 +152,9 @@ public class ComicDetailFragment extends Fragment {
         ImageView headerImage = view.findViewById(R.id.headerImage);
         Button btnFollow = view.findViewById(R.id.btnFollow);
         Button btnViewStart = view.findViewById(R.id.btnViewStart);
+        userId = LoginService.userId;
+        FollowComicService followService = new FollowComicService();
+        followService.getFollowComic(userId, btnFollow, slug);
 
         ComicName.setText(nameComic);
         AnimationUnderline animation = new AnimationUnderline(underline, tabDetail, tabChapter);
@@ -199,28 +206,17 @@ public class ComicDetailFragment extends Fragment {
 
             animation.moveTo(tabChapter, true);
         });
-
-        final boolean[] isFollowing = new boolean[1];
-
-        if (listFollowComic.contains(slug)) {
-            isFollowing[0] = true;
-            btnFollow.setText("Đang theo dõi");
-        } else {
-            isFollowing[0] = false;
-            btnFollow.setText("Theo dõi");
-        }
-
         btnFollow.setOnClickListener(v -> {
-            if (isFollowing[0]) {
-                isFollowing[0] = false;
+            if (ComicDetailFragment.listFollowComic.contains(slug)) {
+                followService.unFollowComic(userId, slug);
+                ComicDetailFragment.listFollowComic.remove(slug);
                 btnFollow.setText("Theo dõi");
-
             } else {
-                isFollowing[0] = true;
+                followService.followComic(userId, slug);
+                ComicDetailFragment.listFollowComic.add(slug);
                 btnFollow.setText("Đang theo dõi");
             }
         });
-
 
         btnViewStart.setOnClickListener(v -> {
             Intent intent = new Intent(requireContext(), ChapterUI.class);
@@ -268,4 +264,5 @@ public class ComicDetailFragment extends Fragment {
                     ((LinearLayout) textView.getParent()).indexOfChild(textView) + 1);
         });
     }
+
 }

@@ -19,7 +19,7 @@ public class ComicListChapterRepository {
     public static void loadComicDetailAsync(LoadCallbackComicDetail callback, String slug) {
         CompletableFuture.supplyAsync(() -> {
             try {
-                String json = connectAPI.getAPIComic("https://otruyenapi.com/v1/api/truyen-tranh/" + slug);
+                String json = connectAPI.getAPI("https://otruyenapi.com/v1/api/truyen-tranh/" + slug);
                 return parseComicDetail(json);
             } catch (Exception e) {
                 throw new RuntimeException(e);

@@ -27,13 +27,13 @@ public class ImagesChapterRepository {
             try {
                 for (ComicDetail.Chapter chapter : chapters) {
                     if (chapter.getChapterName().equals(chapterName)) {
-                        String json = connectAPI.getAPIComic(chapter.getChapterApiData());
+                        String json = connectAPI.getAPI(chapter.getChapterApiData());
                         linkImages = handleImagesChapter(json);
                         break;
                     }
                 }
             } catch (Exception e) {
-                e.printStackTrace();
+                System.out.println("Lỗi" + e.getMessage());
             }
 
             List<String> finalLinkImages = linkImages;
@@ -62,7 +62,7 @@ public class ImagesChapterRepository {
 
         for (JsonElement e : images) {
             JsonObject imgObj = e.getAsJsonObject();
-            String page = imgObj.get("image_page").getAsString();
+            //String page = imgObj.get("image_page").getAsString();
             String file = imgObj.get("image_file").getAsString();
             String fullUrl = domain + "/" + chapterPath + "/" + file;
             linkImages.add(fullUrl);

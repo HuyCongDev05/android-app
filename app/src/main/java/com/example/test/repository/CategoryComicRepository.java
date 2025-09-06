@@ -19,7 +19,7 @@ public class CategoryComicRepository {
     public static void loadComicDetailAsync(LoadCallbackCategory callback) {
         CompletableFuture.supplyAsync(() -> {
             try {
-                String json = connectAPI.getAPIComic("https://otruyenapi.com/v1/api/the-loai");
+                String json = connectAPI.getAPI("https://otruyenapi.com/v1/api/the-loai");
                 return parseCategories(json);
             } catch (Exception e) {
                 throw new RuntimeException(e);
@@ -29,6 +29,7 @@ public class CategoryComicRepository {
             return null;
         });
     }
+
     public static Map<String, String> parseCategories(String json) {
         Map<String, String> categories = new HashMap<>();
 

@@ -17,8 +17,9 @@ public class GetFollowComicRepository {
     public static void loadComicDetailAsync(String userId, LoadCallBackFollowComicList callback) {
         CompletableFuture.<List<String>>supplyAsync(() -> {
                     try {
-                        String json = connectAPI.getAPIComic("http://localhost:8080/api/comic/getAll/" + userId);
-                        Type listType = new TypeToken<List<String>>() {}.getType();
+                        String json = connectAPI.getAPI("http://10.0.2.2:8080/api/comic/getAll/" + userId);
+                        Type listType = new TypeToken<List<String>>() {
+                        }.getType();
                         return gson.fromJson(json, listType);
                     } catch (Exception e) {
                         throw new RuntimeException(e);

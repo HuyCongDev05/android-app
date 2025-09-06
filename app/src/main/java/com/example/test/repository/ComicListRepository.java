@@ -25,17 +25,17 @@ public class ComicListRepository {
         HashMap<String, List<Comic>> map = new HashMap<>();
 
         CompletableFuture<List<Comic>> proposeFuture = CompletableFuture.supplyAsync(() -> {
-            String json = connectAPI.getAPIComic("https://otruyenapi.com/v1/api/home");
+            String json = connectAPI.getAPI("https://otruyenapi.com/v1/api/home");
             return parseHomeAPI(json);
         }, executor);
 
         CompletableFuture<List<Comic>> newFuture = CompletableFuture.supplyAsync(() -> {
-            String json = connectAPI.getAPIComic("https://otruyenapi.com/v1/api/danh-sach/truyen-moi?page=3");
+            String json = connectAPI.getAPI("https://otruyenapi.com/v1/api/danh-sach/truyen-moi?page=3");
             return parseNewComicsAPI(json);
         }, executor);
 
         CompletableFuture<List<Comic>> finishedFuture = CompletableFuture.supplyAsync(() -> {
-            String json = connectAPI.getAPIComic("https://otruyenapi.com/v1/api/danh-sach/hoan-thanh?page=2");
+            String json = connectAPI.getAPI("https://otruyenapi.com/v1/api/danh-sach/hoan-thanh?page=2");
             return parseFinishedComicsAPI(json);
         }, executor);
 
