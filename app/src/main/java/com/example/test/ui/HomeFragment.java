@@ -1,9 +1,13 @@
 package com.example.test.ui;
 
+import android.content.Context;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.inputmethod.EditorInfo;
+import android.view.inputmethod.InputMethodManager;
+import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
@@ -31,13 +35,53 @@ public class HomeFragment extends Fragment {
     public View onCreateView(@NonNull LayoutInflater inflater,
                              @Nullable ViewGroup container,
                              @Nullable Bundle savedInstanceState) {
-        View root = inflater.inflate(R.layout.activity_home, container, false);
+        View view = inflater.inflate(R.layout.activity_home, container, false);
+        ImageView iconSearch = view.findViewById(R.id.iconSearch);
+        EditText searchInput = view.findViewById(R.id.searchInput);
+        View searchOverlay = view.findViewById(R.id.searchOverlay);
 
+        iconSearch.setOnClickListener(v -> {
+            searchInput.setVisibility(View.VISIBLE);
+            searchOverlay.setVisibility(View.VISIBLE);
+            searchInput.requestFocus();
+
+            // Hiện bàn phím
+            InputMethodManager imm = (InputMethodManager) requireContext().getSystemService(Context.INPUT_METHOD_SERVICE);
+            imm.showSoftInput(searchInput, InputMethodManager.SHOW_IMPLICIT);
+        });
+
+        searchInput.setOnEditorActionListener((v, actionId, event) -> {
+            if (actionId == EditorInfo.IME_ACTION_SEARCH) {
+                String query = v.getText().toString().trim();
+//                if (!query.isEmpty()) {
+//                    Intent intent = new Intent(this, SearchResultActivity.class);
+//                    intent.putExtra("query", query);
+//                    startActivity(intent);
+//                }
+                // ẩn bàn phím
+                InputMethodManager imm = (InputMethodManager) requireContext().getSystemService(Context.INPUT_METHOD_SERVICE);
+                imm.hideSoftInputFromWindow(searchInput.getWindowToken(), 0);
+                // Ẩn search sau khi bấm
+                searchInput.setVisibility(View.GONE);
+                searchOverlay.setVisibility(View.GONE);
+                return true;
+            }
+            return false;
+        });
+
+        // Khi bấm vào overlay → đóng search
+        searchOverlay.setOnClickListener(v -> {
+            searchInput.setVisibility(View.GONE);
+            searchOverlay.setVisibility(View.GONE);
+            // ẩn bàn phím
+            InputMethodManager imm = (InputMethodManager) requireContext().getSystemService(Context.INPUT_METHOD_SERVICE);
+            imm.hideSoftInputFromWindow(searchInput.getWindowToken(), 0);
+        });
         if (DataCache.comicMap != null) {
-            ComicListBook(DataCache.comicMap, root);
+            ComicListBook(DataCache.comicMap, view);
         }
 
-        return root;
+        return view;
     }
 
     private View createComicView(Comic comic, ViewGroup parent) {

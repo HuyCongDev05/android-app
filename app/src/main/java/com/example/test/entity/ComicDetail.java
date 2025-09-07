@@ -50,5 +50,13 @@ public class ComicDetail {
         public void setChapterName(String chapterName) {
             this.chapterName = chapterName;
         }
+
+        @Override
+        public String toString() {
+            return "Chapter{" +
+                    "chapterName='" + chapterName + '\'' +
+                    ", chapterApiData='" + chapterApiData + '\'' +
+                    '}';
+        }
     }
 }

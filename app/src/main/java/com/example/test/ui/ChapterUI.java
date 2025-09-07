@@ -20,6 +20,9 @@ import com.example.test.util.ChapterUtils;
 import java.util.List;
 
 public class ChapterUI extends AppCompatActivity {
+
+    private String chapter;
+
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -27,10 +30,37 @@ public class ChapterUI extends AppCompatActivity {
         TextView chapterName = findViewById(R.id.chapterName);
         ImageView btnBack = findViewById(R.id.btnBack);
         chapterName.setText(ComicDetailFragment.chapterName);
-        String chapter = ChapterUtils.extractChapterNumber(ComicDetailFragment.chapterName);
+        chapter = ChapterUtils.extractChapterNumber(ComicDetailFragment.chapterName);
+        ImageView btnNextChapter = findViewById(R.id.btnNextChapter);
+        ImageView btnBackChapter = findViewById(R.id.btnBackChapter);
+        String lastChapter = ComicDetailFragment.arr[ComicDetailFragment.arr.length - 1];
         btnBack.setOnClickListener(v -> getOnBackPressedDispatcher().onBackPressed());
         ChapterComicService service = new ChapterComicService();
         service.handleImagesChapterComic(chapter, this::loadImages);
+
+        if (chapter.equals(ComicDetailFragment.arr[0])) {
+            btnBackChapter.setImageResource(R.drawable.icon_back_chapter_max);
+        }
+
+        btnBackChapter.setOnClickListener(v -> {
+            int index = Integer.parseInt(chapter) - 1;
+            service.handleImagesChapterComic(String.valueOf(index), this::loadImages);
+            btnNextChapter.setImageResource(R.drawable.icon_next_chapter);
+            chapterName.setText("Chapter " + index);
+            chapter = String.valueOf(index);
+        });
+
+        if (!chapter.equals(lastChapter)) {
+            btnNextChapter.setOnClickListener(v -> {
+                int index = Integer.parseInt(chapter) + 1;
+                service.handleImagesChapterComic(String.valueOf(index), this::loadImages);
+                btnBackChapter.setImageResource(R.drawable.icon_back_chapter);
+                chapterName.setText("Chapter " + index);
+                chapter = String.valueOf(index);
+            });
+        } else {
+            btnNextChapter.setImageResource(R.drawable.icon_next_chapter_max);
+        }
     }
 
     public void loadImages(List<String> imageUrls) {

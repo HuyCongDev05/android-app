@@ -22,14 +22,15 @@
             android:layout_width="20dp"
             android:layout_height="20dp"
             android:layout_marginTop="1dp"
-            android:src="@drawable/icon_back"
-            app:tint="@android:color/white" />
+            android:background="?attr/selectableItemBackgroundBorderless"
+            android:src="@drawable/icon_back" />
 
         <TextView
             android:id="@+id/chapterName"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
+            android:background="?attr/selectableItemBackgroundBorderless"
             android:paddingLeft="140dp"
             android:textColor="@android:color/white"
             android:textSize="16sp"
@@ -69,22 +70,24 @@
             android:layout_height="28dp"
             android:layout_marginEnd="24dp"
             android:src="@drawable/icon_list_chapter"
-            app:tint="@android:color/white" />
+            app:tint="@color/button_tint" />
 
         <ImageView
+            android:id="@+id/btnBackChapter"
             android:layout_width="28dp"
             android:layout_height="28dp"
             android:layout_marginStart="75dp"
             android:layout_marginEnd="80dp"
             android:src="@drawable/icon_back_chapter"
-            app:tint="@android:color/white" />
+            app:tint="@color/button_tint" />
 
         <ImageView
+            android:id="@+id/btnNextChapter"
             android:layout_width="28dp"
             android:layout_height="28dp"
             android:layout_marginEnd="24dp"
             android:src="@drawable/icon_next_chapter"
-            app:tint="@android:color/white" />
+            app:tint="@color/button_tint" />
     </LinearLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

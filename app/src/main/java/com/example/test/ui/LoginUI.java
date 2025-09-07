@@ -3,6 +3,8 @@ package com.example.test.ui;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.Handler;
+import android.os.Looper;
 import android.text.TextUtils;
 import android.view.View;
 import android.view.animation.Animation;
@@ -44,21 +46,41 @@ public class LoginUI extends AppCompatActivity {
         loginButton.setOnClickListener(v -> {
             if (checkLogin(this, emailInput.getText().toString().trim(), passwordInput.getText().toString().trim())) {
                 runOnUiThread(() -> spinnerOverlay.setVisibility(View.VISIBLE));
-                loginService.CheckLoginAsync(emailInput.getText().toString().trim(), passwordInput.getText().toString().trim(), success -> {
-                    if (success) {
-                        comicListService.handleComicList().thenAccept(successListComic -> {
-                            if (successListComic) {
-                                nextHomeUI();
-                                runOnUiThread(() -> spinnerOverlay.setVisibility(View.GONE));
+
+                // Handler để timeout sau 30s
+                Handler handler = new Handler(Looper.getMainLooper());
+                Runnable timeoutTask = () -> {
+                    // Nếu sau 30s vẫn chưa tắt spinner thì báo lỗi
+                    if (spinnerOverlay.getVisibility() == View.VISIBLE) {
+                        spinnerOverlay.setVisibility(View.GONE);
+                        Toast.makeText(LoginUI.this, "Vui lòng thử lại", Toast.LENGTH_SHORT).show();
+                    }
+                };
+                handler.postDelayed(timeoutTask, 15_000); // 15 giây
+
+                loginService.CheckLoginAsync(
+                        emailInput.getText().toString().trim(),
+                        passwordInput.getText().toString().trim(),
+                        success -> {
+                            handler.removeCallbacks(timeoutTask); // hủy timeout nếu có phản hồi
+
+                            if (success) {
+                                comicListService.handleComicList().thenAccept(successListComic -> {
+                                    if (successListComic) {
+                                        nextHomeUI();
+                                        runOnUiThread(() -> spinnerOverlay.setVisibility(View.GONE));
+                                    }
+                                });
+                            } else {
+                                runOnUiThread(() -> {
+                                    Toast.makeText(LoginUI.this, "Sai tài khoản hoặc mật khẩu", Toast.LENGTH_SHORT).show();
+                                    spinnerOverlay.setVisibility(View.GONE);
+                                });
                             }
                         });
-                    } else {
-                        Toast.makeText(LoginUI.this, "Sai tài khoản hoặc mật khẩu", Toast.LENGTH_SHORT).show();
-                        runOnUiThread(() -> spinnerOverlay.setVisibility(View.GONE));
-                    }
-                });
             }
         });
+
     }
 
     public void register() {

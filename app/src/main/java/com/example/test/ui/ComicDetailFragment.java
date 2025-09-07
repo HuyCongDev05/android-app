@@ -43,6 +43,7 @@ public class ComicDetailFragment extends Fragment {
     public static String chapterName;
     public static String userId;
     public static List<String> listFollowComic = new ArrayList<>();
+    public static String[] arr = new String[]{};
     FlexboxLayout tagContainer;
     String slug = HomeFragment.slug;
     String nameComic = HomeFragment.nameComic;
@@ -75,6 +76,7 @@ public class ComicDetailFragment extends Fragment {
     }
 
     public static void setupChapterRecycler(RecyclerView recyclerChapters, List<ComicDetail.Chapter> chapters, Context context) {
+        String[] arrChapter = new String[chapters.size()];
         //  Gán LayoutManager
         recyclerChapters.setLayoutManager(new LinearLayoutManager(context));
 
@@ -93,6 +95,11 @@ public class ComicDetailFragment extends Fragment {
                 // Set tên chapter
                 vh.tvChapterName.setText("Chapter " + chapters.get(position).getChapterName());
                 vh.tvChapterName.setTextColor(Color.WHITE);
+
+                for (int i = 0; i < chapters.size(); i++) {
+                    arrChapter[i] = chapters.get(i).getChapterName();
+                }
+                arr = arrChapter;
 
                 // Xử lý click
                 vh.itemView.setOnClickListener((View v) -> v.postDelayed(() -> {
