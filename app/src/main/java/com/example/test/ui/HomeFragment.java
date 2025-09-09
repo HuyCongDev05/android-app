@@ -1,7 +1,6 @@
 package com.example.test.ui;
 
 import android.content.Context;
-import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -55,8 +54,15 @@ public class HomeFragment extends Fragment {
             if (actionId == EditorInfo.IME_ACTION_SEARCH) {
                 String query = v.getText().toString().trim();
                 if (!query.isEmpty()) {
-                    Intent intent = new Intent(requireContext(), SearchUI.class);
-                    startActivity(intent);
+                    searchInput.setText("");
+                    SearchUI searchUI = new SearchUI();
+                    requireActivity().findViewById(R.id.taskbar).setVisibility(View.GONE);
+                    requireActivity().getSupportFragmentManager()
+                            .beginTransaction()
+                            .setReorderingAllowed(false)
+                            .replace(R.id.fragment_container, searchUI)
+                            .addToBackStack(null)
+                            .commit();
                 }
                 // ẩn bàn phím
                 InputMethodManager imm = (InputMethodManager) requireContext().getSystemService(Context.INPUT_METHOD_SERVICE);

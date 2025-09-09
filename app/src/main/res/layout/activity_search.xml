@@ -1,7 +1,59 @@
-<?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/rootLayout"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:background="#000000"
+    android:padding="8dp">
 
+    <!-- Thanh tìm kiếm có nút back -->
+    <RelativeLayout
+        android:id="@+id/searchBar"
+        android:layout_width="match_parent"
+        android:layout_height="48dp"
+        android:layout_marginTop="25dp">
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+        <!-- Nút back -->
+        <ImageView
+            android:id="@+id/btnBack"
+            android:layout_width="20dp"
+            android:layout_height="20dp"
+            android:layout_centerVertical="true"
+            android:background="?attr/selectableItemBackgroundBorderless"
+            android:src="@drawable/icon_back"
+            app:tint="@color/button_tint" />
+
+        <!-- Ô nhập tìm kiếm -->
+        <EditText
+            android:id="@+id/searchInputResult"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_toEndOf="@id/btnBack"
+            android:layout_marginStart="12dp"
+            android:background="@drawable/bg_search_input"
+            android:hint="Tìm truyện..."
+            android:padding="10dp"
+            android:textColor="#FFFFFF"
+            android:singleLine="true"
+            android:imeOptions="actionSearch"
+            android:inputType="text"
+            android:textColorHint="#888" />
+    </RelativeLayout>
+
+    <!-- Danh sách kết quả -->
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/recyclerSearchResult"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_below="@id/searchBar"
+        android:layout_marginTop="8dp"
+        android:scrollbars="vertical" />
+
+    <!-- Overlay che mờ -->
+    <View
+        android:id="@+id/searchOverlay"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="#80000000"
+        android:visibility="gone" />
+</RelativeLayout>
