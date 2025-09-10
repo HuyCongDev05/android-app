@@ -7,10 +7,10 @@ import com.example.test.entity.ComicDetail;
 import com.example.test.repository.ComicListChapterRepository;
 import com.example.test.repository.LoadCallbackComicDetail;
 
-public class ComicListChapterService {
+public class ComicDetailService {
 
     public void getComicDetail(String slug, LoadCallbackComicDetail callback) {
-        ComicListChapterRepository.loadComicDetailAsync(new LoadCallbackComicDetail() {
+        ComicListChapterRepository.loadComicListAsync(new LoadCallbackComicDetail() {
             @Override
             public void onLoadSuccess(ComicDetail comicDetail) {
                 new Handler(Looper.getMainLooper()).post(() -> callback.onLoadSuccess(comicDetail));

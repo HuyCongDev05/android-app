@@ -25,9 +25,6 @@ import java.util.HashMap;
 import java.util.List;
 
 public class HomeFragment extends Fragment {
-    public static String slug;
-    public static String nameComic;
-    public static String urlComic;
 
 
     @Nullable
@@ -54,8 +51,9 @@ public class HomeFragment extends Fragment {
             if (actionId == EditorInfo.IME_ACTION_SEARCH) {
                 String query = v.getText().toString().trim();
                 if (!query.isEmpty()) {
-                    searchInput.setText("");
                     SearchUI searchUI = new SearchUI();
+                    searchUI.performSearch(query);
+                    searchInput.setText("");
                     requireActivity().findViewById(R.id.taskbar).setVisibility(View.GONE);
                     requireActivity().getSupportFragmentManager()
                             .beginTransaction()
@@ -64,10 +62,8 @@ public class HomeFragment extends Fragment {
                             .addToBackStack(null)
                             .commit();
                 }
-                // ẩn bàn phím
                 InputMethodManager imm = (InputMethodManager) requireContext().getSystemService(Context.INPUT_METHOD_SERVICE);
                 imm.hideSoftInputFromWindow(searchInput.getWindowToken(), 0);
-                // Ẩn search sau khi bấm
                 searchInput.setVisibility(View.GONE);
                 searchOverlay.setVisibility(View.GONE);
                 return true;
@@ -75,22 +71,19 @@ public class HomeFragment extends Fragment {
             return false;
         });
 
-        // Khi bấm vào overlay → đóng search
         searchOverlay.setOnClickListener(v -> {
             searchInput.setVisibility(View.GONE);
             searchOverlay.setVisibility(View.GONE);
-            // ẩn bàn phím
             InputMethodManager imm = (InputMethodManager) requireContext().getSystemService(Context.INPUT_METHOD_SERVICE);
             imm.hideSoftInputFromWindow(searchInput.getWindowToken(), 0);
         });
         if (DataCache.comicMap != null) {
             ComicListBook(DataCache.comicMap, view);
         }
-
         return view;
     }
 
-    private View createComicView(Comic comic, ViewGroup parent) {
+    private View ComicView(Comic comic, ViewGroup parent) {
         LayoutInflater inflater = LayoutInflater.from(getContext());
         View view = inflater.inflate(R.layout.item_comic, parent, false);
 
@@ -110,14 +103,14 @@ public class HomeFragment extends Fragment {
                 .into(imageView);
 
         view.setOnClickListener(v -> {
-            nameComic = comic.getName();
-            slug = comic.getSlug();
-            urlComic = comic.getImageUrl();
+            ComicDetailFragment.nameComic = comic.getName();
+            ComicDetailFragment.slug = comic.getSlug();
+            ComicDetailFragment.urlComic = comic.getImageUrl();
             ComicDetailFragment detailFragment = new ComicDetailFragment();
             requireActivity().findViewById(R.id.taskbar).setVisibility(View.GONE);
             requireActivity().getSupportFragmentManager()
                     .beginTransaction()
-                    .setReorderingAllowed(false) // tắt tối ưu hóa
+                    .setReorderingAllowed(false)
                     .replace(R.id.fragment_container, detailFragment)
                     .addToBackStack(null)
                     .commit();
@@ -131,7 +124,7 @@ public class HomeFragment extends Fragment {
         if (newComics != null && !newComics.isEmpty()) {
             LinearLayout comicNewListLayout = root.findViewById(R.id.ComicNewList);
             for (Comic comic : newComics) {
-                View comicView = createComicView(comic, comicNewListLayout);
+                View comicView = ComicView(comic, comicNewListLayout);
                 comicNewListLayout.addView(comicView);
             }
         }
@@ -141,7 +134,7 @@ public class HomeFragment extends Fragment {
         if (proposeComics != null && !proposeComics.isEmpty()) {
             LinearLayout comicProposeListLayout = root.findViewById(R.id.ProposeList);
             for (Comic comic : proposeComics) {
-                View comicView = createComicView(comic, comicProposeListLayout);
+                View comicView = ComicView(comic, comicProposeListLayout);
                 comicProposeListLayout.addView(comicView);
             }
         }
@@ -151,7 +144,7 @@ public class HomeFragment extends Fragment {
         if (finishedComics != null && !finishedComics.isEmpty()) {
             LinearLayout comicFinishedListLayout = root.findViewById(R.id.ComicFinishedList);
             for (Comic comic : finishedComics) {
-                View comicView = createComicView(comic, comicFinishedListLayout);
+                View comicView = ComicView(comic, comicFinishedListLayout);
                 comicFinishedListLayout.addView(comicView);
             }
         }

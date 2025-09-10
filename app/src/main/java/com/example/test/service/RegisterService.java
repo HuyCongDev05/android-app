@@ -7,7 +7,7 @@ import com.example.test.repository.UsersRepository;
 
 public class RegisterService {
     private final UsersRepository usersRepository = new UsersRepository();
-    private Handler mainHandler = new Handler(Looper.getMainLooper());
+    private final Handler mainHandler = new Handler(Looper.getMainLooper());
 
     public void CheckRegisterAsync(String userName, String password, RegisterService.RegisterCallback callback) {
         new Thread(() -> {

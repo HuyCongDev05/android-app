@@ -67,6 +67,7 @@ public class ImagesChapterRepository {
             String fullUrl = domain + "/" + chapterPath + "/" + file;
             linkImages.add(fullUrl);
         }
+        System.out.println(linkImages);
         return linkImages;
     }
 }

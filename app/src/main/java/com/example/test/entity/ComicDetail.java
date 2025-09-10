@@ -24,6 +24,14 @@ public class ComicDetail {
         public String getSlug() {
             return slug;
         }
+
+        @Override
+        public String toString() {
+            return "Breadcrumb{" +
+                    "name='" + name + '\'' +
+                    ", slug='" + slug + '\'' +
+                    '}';
+        }
     }
 
     public static class Chapter {

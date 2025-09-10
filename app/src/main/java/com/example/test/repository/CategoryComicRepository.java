@@ -9,14 +9,11 @@ import com.google.gson.JsonParser;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.concurrent.CompletableFuture;
-import java.util.concurrent.ExecutorService;
-import java.util.concurrent.Executors;
 
 public class CategoryComicRepository {
-    private static final ExecutorService executor = Executors.newFixedThreadPool(1);
     private static final ConnectAPI connectAPI = new ConnectAPI();
 
-    public static void loadComicDetailAsync(LoadCallbackCategory callback) {
+    public static void loadCategoryComicAsync(LoadCallbackCategory callback) {
         CompletableFuture.supplyAsync(() -> {
             try {
                 String json = connectAPI.getAPI("https://otruyenapi.com/v1/api/the-loai");
@@ -24,8 +21,8 @@ public class CategoryComicRepository {
             } catch (Exception e) {
                 throw new RuntimeException(e);
             }
-        }, executor).thenAccept(callback::onLoadSuccess).exceptionally(ex -> {
-            System.out.println("Lỗi: " + ex.getMessage());
+        }, AppExecutors.getNetworkExecutor()).thenAccept(callback::onLoadSuccess).exceptionally(ex -> {
+            System.out.println("Lỗi loadCategoryComicAsync: " + ex.getMessage());
             return null;
         });
     }

@@ -13,12 +13,11 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class FollowComicService {
-    public boolean followComic(String userId, String slug) {
+    public void followComic(String userId, String slug) {
         try {
-            return loadFollowComicAsync(userId, slug).get();
+            loadFollowComicAsync(userId, slug);
         } catch (Exception e) {
-            System.out.println("Lỗi" + e.getMessage());
-            return false;
+            System.out.println("Lỗi followComic: " + e.getMessage());
         }
     }
 
@@ -26,9 +25,8 @@ public class FollowComicService {
         loadUnFollowComicAsync(userId, slug);
     }
 
-
     public void getFollowComic(String userId, Button btnFollow, String slug) {
-        GetFollowComicRepository.loadComicDetailAsync(userId, new LoadCallBackFollowComicList() {
+        GetFollowComicRepository.loadGetFollowComicAsync(userId, new LoadCallBackFollowComicList() {
             @Override
             public void onSuccess(List<String> comics) {
                 ComicDetailFragment.listFollowComic = comics != null ? comics : new ArrayList<>();
@@ -38,7 +36,7 @@ public class FollowComicService {
 
             @Override
             public void onError(Exception e) {
-                System.out.println("Lỗi " + e.getMessage());
+                System.out.println("Lỗi getFollowComic: " + e.getMessage());
             }
         });
     }

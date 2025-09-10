@@ -10,6 +10,8 @@
         android:id="@+id/headerImage"
         android:layout_width="0dp"
         android:layout_height="280dp"
+        android:clickable="false"
+        android:focusable="false"
         android:scaleType="centerCrop"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"

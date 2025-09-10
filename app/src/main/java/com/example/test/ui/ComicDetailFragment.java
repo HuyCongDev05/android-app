@@ -30,7 +30,7 @@ import com.example.test.R;
 import com.example.test.animation.AnimationUnderline;
 import com.example.test.entity.ComicDetail;
 import com.example.test.repository.LoadCallbackComicDetail;
-import com.example.test.service.ComicListChapterService;
+import com.example.test.service.ComicDetailService;
 import com.example.test.service.FollowComicService;
 import com.example.test.service.LoginService;
 import com.google.android.flexbox.FlexboxLayout;
@@ -44,10 +44,10 @@ public class ComicDetailFragment extends Fragment {
     public static String userId;
     public static List<String> listFollowComic = new ArrayList<>();
     public static String[] arr = new String[]{};
+    public static String slug;
+    public static String nameComic;
+    public static String urlComic;
     FlexboxLayout tagContainer;
-    String slug = HomeFragment.slug;
-    String nameComic = HomeFragment.nameComic;
-    String urlComic = HomeFragment.urlComic;
 
     public static void addTags(Context context, FlexboxLayout container, List<ComicDetail.Breadcrumb> tags) {
         container.removeAllViews();
@@ -165,7 +165,7 @@ public class ComicDetailFragment extends Fragment {
 
         ComicName.setText(nameComic);
         AnimationUnderline animation = new AnimationUnderline(underline, tabDetail, tabChapter);
-        ComicListChapterService service = new ComicListChapterService();
+        ComicDetailService service = new ComicDetailService();
 
         spinnerOverlay.setVisibility(View.VISIBLE);
         spinner.startAnimation(rotateAnim);

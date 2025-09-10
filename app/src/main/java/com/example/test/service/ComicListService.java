@@ -10,14 +10,14 @@ public class ComicListService {
         CompletableFuture<Boolean> future = new CompletableFuture<>();
 
         try {
-            ComicListRepository.loadComicsAsync((success, map) -> {
+            ComicListRepository.loadComicListAsync((success, map) -> {
                 if (success) {
                     DataCache.comicMap = map;
                 }
                 future.complete(success);
             });
         } catch (Exception e) {
-            System.out.println("Lỗi: " + e.getMessage());
+            System.out.println("Lỗi handleComicList: " + e.getMessage());
             future.complete(false);
         }
 

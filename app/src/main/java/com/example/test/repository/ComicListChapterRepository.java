@@ -9,14 +9,11 @@ import com.google.gson.JsonParser;
 
 import java.util.ArrayList;
 import java.util.concurrent.CompletableFuture;
-import java.util.concurrent.ExecutorService;
-import java.util.concurrent.Executors;
 
 public class ComicListChapterRepository {
-    private static final ExecutorService executor = Executors.newFixedThreadPool(1);
     private static final ConnectAPI connectAPI = new ConnectAPI();
 
-    public static void loadComicDetailAsync(LoadCallbackComicDetail callback, String slug) {
+    public static void loadComicListAsync(LoadCallbackComicDetail callback, String slug) {
         CompletableFuture.supplyAsync(() -> {
             try {
                 String json = connectAPI.getAPI("https://otruyenapi.com/v1/api/truyen-tranh/" + slug);
@@ -24,8 +21,8 @@ public class ComicListChapterRepository {
             } catch (Exception e) {
                 throw new RuntimeException(e);
             }
-        }, executor).thenAccept(callback::onLoadSuccess).exceptionally(ex -> {
-            System.out.println("Lỗi: " + ex.getMessage());
+        }, AppExecutors.getNetworkExecutor()).thenAccept(callback::onLoadSuccess).exceptionally(ex -> {
+            System.out.println("Lỗi loadComicListAsync: " + ex.getMessage());
             callback.onLoadFailed(ex);
             return null;
         });

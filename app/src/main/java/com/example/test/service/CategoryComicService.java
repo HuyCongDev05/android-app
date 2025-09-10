@@ -8,6 +8,6 @@ import com.example.test.repository.LoadCallbackCategory;
 
 public class CategoryComicService {
     public void getCategories(LoadCallbackCategory callback) {
-        CategoryComicRepository.loadComicDetailAsync(categories -> new Handler(Looper.getMainLooper()).post(() -> callback.onLoadSuccess(categories)));
+        CategoryComicRepository.loadCategoryComicAsync(categories -> new Handler(Looper.getMainLooper()).post(() -> callback.onLoadSuccess(categories)));
     }
 }

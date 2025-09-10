@@ -28,15 +28,15 @@
             android:id="@+id/searchInputResult"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:layout_toEndOf="@id/btnBack"
             android:layout_marginStart="12dp"
+            android:layout_toEndOf="@id/btnBack"
             android:background="@drawable/bg_search_input"
             android:hint="Tìm truyện..."
-            android:padding="10dp"
-            android:textColor="#FFFFFF"
-            android:singleLine="true"
             android:imeOptions="actionSearch"
             android:inputType="text"
+            android:padding="10dp"
+            android:singleLine="true"
+            android:textColor="#FFFFFF"
             android:textColorHint="#888" />
     </RelativeLayout>
 
@@ -49,11 +49,12 @@
         android:layout_marginTop="8dp"
         android:scrollbars="vertical" />
 
-    <!-- Overlay che mờ -->
     <View
         android:id="@+id/searchOverlay"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:background="#80000000"
+        android:clickable="true"
+        android:focusable="true"
         android:visibility="gone" />
 </RelativeLayout>
