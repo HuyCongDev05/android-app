@@ -5,7 +5,8 @@ import com.example.test.entity.Comic;
 import java.util.HashMap;
 import java.util.List;
 
-public class DataCache {
+public class DataCacheComicList {
     public static HashMap<String, List<Comic>> comicMap;
+
 }
 

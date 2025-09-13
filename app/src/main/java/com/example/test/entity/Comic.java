@@ -34,4 +34,13 @@ public class Comic {
     public void setImageUrl(String imageUrl) {
         this.imageUrl = imageUrl;
     }
+
+    @Override
+    public String toString() {
+        return "Comic{" +
+                "name='" + name + '\'' +
+                ", slug='" + slug + '\'' +
+                ", imageUrl='" + imageUrl + '\'' +
+                '}';
+    }
 }
