@@ -14,14 +14,18 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.request.target.Target;
 import com.example.test.R;
+import com.example.test.entity.ComicDetail;
 import com.example.test.service.ChapterComicService;
 import com.example.test.util.ChapterUtils;
 
 import java.util.List;
+import java.util.stream.IntStream;
 
 public class ChapterUI extends AppCompatActivity {
 
-    private String chapter;
+    public static String chapter;
+    int currentIndex = 0;
+    public static List<ComicDetail.Chapter> chapters;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -33,34 +37,34 @@ public class ChapterUI extends AppCompatActivity {
         chapter = ChapterUtils.extractChapterNumber(ComicDetailFragment.chapterName);
         ImageView btnNextChapter = findViewById(R.id.btnNextChapter);
         ImageView btnBackChapter = findViewById(R.id.btnBackChapter);
-        String lastChapter = ComicDetailFragment.arr[ComicDetailFragment.arr.length - 1];
         btnBack.setOnClickListener(v -> getOnBackPressedDispatcher().onBackPressed());
         ChapterComicService service = new ChapterComicService();
         service.handleImagesChapterComic(chapter, this::loadImages);
 
-        if (chapter.equals(ComicDetailFragment.arr[0])) {
+        if (chapter.equals(chapters.get(0).getChapterName())) {
             btnBackChapter.setImageResource(R.drawable.icon_back_chapter_max);
         }
+        currentIndex = IntStream.range(0, chapters.size())
+                .filter(i -> chapters.get(i).getChapterName().equals(chapter))
+                .findFirst()
+                .orElse(0);
 
         btnBackChapter.setOnClickListener(v -> {
-            int index = Integer.parseInt(chapter) - 1;
-            service.handleImagesChapterComic(String.valueOf(index), this::loadImages);
-            btnNextChapter.setImageResource(R.drawable.icon_next_chapter);
-            chapterName.setText("Chapter " + index);
-            chapter = String.valueOf(index);
+            if (currentIndex > 0) currentIndex--;
+            service.handleImagesChapterComic(chapters.get(currentIndex).getChapterName(), this::loadImages);
+            chapterName.setText("Chapter " + chapters.get(currentIndex).getChapterName());
+            btnBackChapter.setImageResource(currentIndex == 0 ? R.drawable.icon_back_chapter_max : R.drawable.icon_back_chapter);
+            btnNextChapter.setImageResource(currentIndex == chapters.size()-1 ? R.drawable.icon_next_chapter_max : R.drawable.icon_next_chapter);
         });
 
-        if (!chapter.equals(lastChapter)) {
-            btnNextChapter.setOnClickListener(v -> {
-                int index = Integer.parseInt(chapter) + 1;
-                service.handleImagesChapterComic(String.valueOf(index), this::loadImages);
-                btnBackChapter.setImageResource(R.drawable.icon_back_chapter);
-                chapterName.setText("Chapter " + index);
-                chapter = String.valueOf(index);
-            });
-        } else {
-            btnNextChapter.setImageResource(R.drawable.icon_next_chapter_max);
-        }
+        btnNextChapter.setOnClickListener(v -> {
+            if (currentIndex < chapters.size()-1) currentIndex++;
+            service.handleImagesChapterComic(chapters.get(currentIndex).getChapterName(), this::loadImages);
+            chapterName.setText("Chapter " + chapters.get(currentIndex).getChapterName());
+            btnBackChapter.setImageResource(currentIndex == 0 ? R.drawable.icon_back_chapter_max : R.drawable.icon_back_chapter);
+            btnNextChapter.setImageResource(currentIndex == chapters.size()-1 ? R.drawable.icon_next_chapter_max : R.drawable.icon_next_chapter);
+        });
+
     }
 
     public void loadImages(List<String> imageUrls) {
@@ -87,7 +91,7 @@ public class ChapterUI extends AppCompatActivity {
                 ImageView imageView = (ImageView) holder.itemView;
                 Glide.with(imageView.getContext())
                         .load(imageUrls.get(position))
-                        .override(Target.SIZE_ORIGINAL) // load ảnh gốc, không resize
+                        .override(Target.SIZE_ORIGINAL)
                         .placeholder(R.drawable.default_comic)
                         .error(R.drawable.default_comic)
                         .into(imageView);

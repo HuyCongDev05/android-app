@@ -19,7 +19,9 @@ import androidx.fragment.app.Fragment;
 import com.bumptech.glide.Glide;
 import com.example.test.R;
 import com.example.test.entity.Comic;
-import com.example.test.repository.DataCacheComicList;
+import com.example.test.repository.DataCache;
+import com.example.test.service.FollowComicService;
+import com.example.test.service.LoginService;
 
 import java.util.HashMap;
 import java.util.List;
@@ -36,6 +38,8 @@ public class HomeFragment extends Fragment {
         ImageView iconSearch = view.findViewById(R.id.iconSearch);
         EditText searchInput = view.findViewById(R.id.searchInput);
         View searchOverlay = view.findViewById(R.id.searchOverlay);
+        FollowComicService followComicService = new FollowComicService();
+        followComicService.getFollowComic(LoginService.userId);
 
         iconSearch.setOnClickListener(v -> {
             searchInput.setVisibility(View.VISIBLE);
@@ -77,8 +81,8 @@ public class HomeFragment extends Fragment {
             InputMethodManager imm = (InputMethodManager) requireContext().getSystemService(Context.INPUT_METHOD_SERVICE);
             imm.hideSoftInputFromWindow(searchInput.getWindowToken(), 0);
         });
-        if (DataCacheComicList.comicMap != null) {
-            ComicListBook(DataCacheComicList.comicMap, view);
+        if (DataCache.comicMap != null) {
+            ComicListBook(DataCache.comicMap, view);
         }
         return view;
     }

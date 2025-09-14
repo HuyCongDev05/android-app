@@ -1,7 +1,7 @@
 package com.example.test.service;
 
 import com.example.test.repository.ComicListRepository;
-import com.example.test.repository.DataCacheComicList;
+import com.example.test.repository.DataCache;
 
 import java.util.concurrent.CompletableFuture;
 
@@ -12,7 +12,7 @@ public class ComicListService {
         try {
             ComicListRepository.loadComicListAsync((success, map) -> {
                 if (success) {
-                    DataCacheComicList.comicMap = map;
+                    DataCache.comicMap = map;
                     System.out.println(map);
                 }
                 future.complete(success);

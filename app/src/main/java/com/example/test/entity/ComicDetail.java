@@ -3,10 +3,12 @@ package com.example.test.entity;
 import java.util.List;
 
 public class ComicDetail {
+    public String name;
     public String director;
     public String image;
     public List<Breadcrumb> breadcrumbs;
     public String content;
+    public String slug;
     public List<Chapter> chapters;
 
     public static class Breadcrumb {

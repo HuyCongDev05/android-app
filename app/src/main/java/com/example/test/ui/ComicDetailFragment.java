@@ -44,10 +44,12 @@ public class ComicDetailFragment extends Fragment {
     public static String userId;
     public static List<String> listFollowComic = new ArrayList<>();
     public static String[] arr = new String[]{};
+
     public static String slug;
     public static String nameComic;
     public static String urlComic;
     FlexboxLayout tagContainer;
+    ComicDetail comicDetails;
 
     public static void addTags(Context context, FlexboxLayout container, List<ComicDetail.Breadcrumb> tags) {
         container.removeAllViews();
@@ -161,7 +163,7 @@ public class ComicDetailFragment extends Fragment {
         Button btnViewStart = view.findViewById(R.id.btnViewStart);
         userId = LoginService.userId;
         FollowComicService followService = new FollowComicService();
-        followService.getFollowComic(userId, btnFollow, slug);
+        followService.setUpFollowComic(userId, btnFollow, slug);
 
         ComicName.setText(nameComic);
         AnimationUnderline animation = new AnimationUnderline(underline, tabDetail, tabChapter);
@@ -173,6 +175,7 @@ public class ComicDetailFragment extends Fragment {
         service.getComicDetail(slug, new LoadCallbackComicDetail() {
             @Override
             public void onLoadSuccess(ComicDetail comicDetail) {
+                comicDetails = comicDetail;
                 spinnerOverlay.setVisibility(View.GONE);
                 spinner.clearAnimation();
 
@@ -185,6 +188,7 @@ public class ComicDetailFragment extends Fragment {
                 addTags(requireContext(), tagContainer, comicDetail.breadcrumbs);
                 setupChapterRecycler(recyclerChapters, comicDetail.chapters, requireContext());
                 makeExpandable(content, containerScroll);
+                ChapterUI.chapters = comicDetails.chapters;
             }
 
             @Override
@@ -226,6 +230,9 @@ public class ComicDetailFragment extends Fragment {
         });
 
         btnViewStart.setOnClickListener(v -> {
+            ChapterUI.chapter = comicDetails.chapters.get(0).getChapterName();
+            System.out.println(ChapterUI.chapters);
+            System.out.println(ChapterUI.chapter);
             Intent intent = new Intent(requireContext(), ChapterUI.class);
             startActivity(intent);
         });

@@ -62,6 +62,11 @@ public class ComicListChapterRepository {
             }
         }
 
+        detail.slug = data.getAsJsonObject("params")
+                .get("slug").getAsString();
+
+        detail.name = data.getAsJsonObject("item")
+                .get("name").getAsString();
         // Lấy chapters
         detail.chapters = new ArrayList<>();
         JsonArray servers = data.getAsJsonObject("item").getAsJsonArray("chapters");

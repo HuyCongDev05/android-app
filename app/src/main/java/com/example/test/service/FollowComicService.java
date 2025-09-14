@@ -5,6 +5,7 @@ import static com.example.test.repository.FollowComicRepository.loadUnFollowComi
 
 import android.widget.Button;
 
+import com.example.test.repository.DataCache;
 import com.example.test.repository.GetFollowComicRepository;
 import com.example.test.repository.LoadCallBackFollowComicList;
 import com.example.test.ui.ComicDetailFragment;
@@ -25,7 +26,7 @@ public class FollowComicService {
         loadUnFollowComicAsync(userId, slug);
     }
 
-    public void getFollowComic(String userId, Button btnFollow, String slug) {
+    public void setUpFollowComic(String userId, Button btnFollow, String slug) {
         GetFollowComicRepository.loadGetFollowComicAsync(userId, new LoadCallBackFollowComicList() {
             @Override
             public void onSuccess(List<String> comics) {
@@ -36,9 +37,22 @@ public class FollowComicService {
 
             @Override
             public void onError(Exception e) {
-                System.out.println("Lỗi getFollowComic: " + e.getMessage());
+                System.out.println("Lỗi setUpFollowComic: " + e.getMessage());
             }
         });
     }
 
+    public void getFollowComic(String userId) {
+        GetFollowComicRepository.loadGetFollowComicAsync(userId, new LoadCallBackFollowComicList() {
+            @Override
+            public void onSuccess(List<String> comics) {
+                DataCache.listFollowComic = comics != null ? comics : new ArrayList<>();
+            }
+
+            @Override
+            public void onError(Exception e) {
+                System.out.println("Lỗi getFollowComic: " + e.getMessage());
+            }
+        });
+    }
 }

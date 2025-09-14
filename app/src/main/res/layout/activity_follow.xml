@@ -11,8 +11,9 @@
         android:id="@+id/recyclerSearchResult"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_marginTop="8dp"
+        android:layout_marginTop="30dp"
         android:scrollbars="vertical" />
+
     <View
         android:id="@+id/searchOverlay"
         android:layout_width="match_parent"
