@@ -40,6 +40,11 @@ public class ComicListChapterRepository {
                 .getAsJsonObject("seoSchema")
                 .get("director").getAsString();
 
+        // Lấy image
+        detail.image = data.getAsJsonObject("seoOnPage")
+                .getAsJsonObject("seoSchema")
+                .get("image").getAsString();
+
         // Lấy content và bỏ thẻ <p>
         String contentHtml = data.getAsJsonObject("item")
                 .get("content").getAsString();
@@ -73,4 +78,5 @@ public class ComicListChapterRepository {
         ImagesChapterRepository.chapters = detail.chapters;
         return detail;
     }
+
 }

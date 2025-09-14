@@ -4,6 +4,7 @@ import java.util.List;
 
 public class ComicDetail {
     public String director;
+    public String image;
     public List<Breadcrumb> breadcrumbs;
     public String content;
     public List<Chapter> chapters;
