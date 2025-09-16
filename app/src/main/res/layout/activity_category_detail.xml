@@ -6,14 +6,13 @@
     android:padding="16dp">
 
     <TextView
-        android:id="@+id/titleFollow"
+        android:id="@+id/titleCategoryDetail"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="5dp"
         android:ellipsize="end"
         android:fontFamily="@font/oswald"
         android:singleLine="true"
-        android:text="Truyện đang theo dõi"
         android:textColor="#FF4D8C"
         android:textSize="22sp"
         android:textStyle="bold" />
@@ -23,7 +22,7 @@
         android:id="@+id/recyclerSearchResult"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_below="@id/titleFollow"
+        android:layout_below="@+id/titleCategoryDetail"
         android:layout_marginTop="10dp"
         android:scrollbars="vertical" />
 

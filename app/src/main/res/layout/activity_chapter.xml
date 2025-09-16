@@ -4,7 +4,6 @@
     android:layout_height="match_parent"
     android:background="#000000">
 
-    <!-- Top bar giữ nguyên -->
     <LinearLayout
         android:id="@+id/topBar"
         android:layout_width="0dp"
@@ -51,7 +50,6 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/topBar" />
 
-    <!-- Bottom bar giữ nguyên -->
     <LinearLayout
         android:id="@+id/bottomBar"
         android:layout_width="0dp"
@@ -66,18 +64,10 @@
         app:layout_constraintStart_toStartOf="parent">
 
         <ImageView
-            android:id="@+id/btnNavMenu"
-            android:layout_width="28dp"
-            android:layout_height="28dp"
-            android:layout_marginEnd="24dp"
-            android:src="@drawable/icon_list_chapter"
-            app:tint="@color/button_tint" />
-
-        <ImageView
             android:id="@+id/btnBackChapter"
             android:layout_width="28dp"
             android:layout_height="28dp"
-            android:layout_marginStart="75dp"
+            android:layout_marginStart="115dp"
             android:layout_marginEnd="80dp"
             android:src="@drawable/icon_back_chapter"
             app:tint="@color/button_tint" />

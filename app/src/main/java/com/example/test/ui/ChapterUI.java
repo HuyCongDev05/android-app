@@ -24,8 +24,8 @@ import java.util.stream.IntStream;
 public class ChapterUI extends AppCompatActivity {
 
     public static String chapter;
-    int currentIndex = 0;
     public static List<ComicDetail.Chapter> chapters;
+    int currentIndex = 0;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -54,15 +54,15 @@ public class ChapterUI extends AppCompatActivity {
             service.handleImagesChapterComic(chapters.get(currentIndex).getChapterName(), this::loadImages);
             chapterName.setText("Chapter " + chapters.get(currentIndex).getChapterName());
             btnBackChapter.setImageResource(currentIndex == 0 ? R.drawable.icon_back_chapter_max : R.drawable.icon_back_chapter);
-            btnNextChapter.setImageResource(currentIndex == chapters.size()-1 ? R.drawable.icon_next_chapter_max : R.drawable.icon_next_chapter);
+            btnNextChapter.setImageResource(currentIndex == chapters.size() - 1 ? R.drawable.icon_next_chapter_max : R.drawable.icon_next_chapter);
         });
 
         btnNextChapter.setOnClickListener(v -> {
-            if (currentIndex < chapters.size()-1) currentIndex++;
+            if (currentIndex < chapters.size() - 1) currentIndex++;
             service.handleImagesChapterComic(chapters.get(currentIndex).getChapterName(), this::loadImages);
             chapterName.setText("Chapter " + chapters.get(currentIndex).getChapterName());
             btnBackChapter.setImageResource(currentIndex == 0 ? R.drawable.icon_back_chapter_max : R.drawable.icon_back_chapter);
-            btnNextChapter.setImageResource(currentIndex == chapters.size()-1 ? R.drawable.icon_next_chapter_max : R.drawable.icon_next_chapter);
+            btnNextChapter.setImageResource(currentIndex == chapters.size() - 1 ? R.drawable.icon_next_chapter_max : R.drawable.icon_next_chapter);
         });
 
     }
