@@ -113,7 +113,6 @@ public class SearchUI extends Fragment {
             FragmentActivity activity) {
 
         if (dataList == null || dataList.isEmpty()) {
-            // Trường hợp KHÔNG có data
             recyclerSearchResult.setLayoutManager(new GridLayoutManager(activity, 1));
             recyclerSearchResult.setAdapter(new RecyclerView.Adapter<>() {
                 @Override
@@ -139,12 +138,10 @@ public class SearchUI extends Fragment {
 
                 @Override
                 public void onBindViewHolder(@NonNull RecyclerView.ViewHolder holder, int position) {
-                    // Không cần bind gì thêm
                 }
             });
 
         } else {
-            // Trường hợp CÓ data
             recyclerSearchResult.setLayoutManager(new GridLayoutManager(activity, 3));
             recyclerSearchResult.setAdapter(new Adapter<>() {
                 @Override
@@ -173,8 +170,6 @@ public class SearchUI extends Fragment {
                     Glide.with(holder.itemView.getContext())
                             .load(comic.getImageUrl())
                             .into(img);
-
-                    // 👉 Xử lý click vào item
                     itemComic.setOnClickListener(v -> {
                         ComicDetailFragment.nameComic = comic.getName();
                         ComicDetailFragment.slug = comic.getSlug();

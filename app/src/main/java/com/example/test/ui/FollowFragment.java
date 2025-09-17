@@ -44,7 +44,10 @@ public class FollowFragment extends Fragment {
     }
 
     public void getComicDetailListSequential(List<String> slugs) {
-        if (slugs == null || slugs.isEmpty()) return;
+        if (slugs == null || slugs.isEmpty()) {
+            setupSearchRecycler(recyclerSearchResult, new ArrayList<>(), requireActivity());
+            return;
+        }
         ComicDetailService service = new ComicDetailService();
 
         DataCache.listComicDetail = new ArrayList<>();
