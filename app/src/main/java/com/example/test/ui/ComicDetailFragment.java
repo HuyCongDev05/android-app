@@ -1,5 +1,6 @@
 package com.example.test.ui;
 
+import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.Color;
@@ -28,11 +29,11 @@ import androidx.recyclerview.widget.RecyclerView.Adapter;
 import com.bumptech.glide.Glide;
 import com.example.test.R;
 import com.example.test.animation.AnimationUnderline;
+import com.example.test.entity.Account;
 import com.example.test.entity.ComicDetail;
 import com.example.test.repository.LoadCallbackComicDetail;
 import com.example.test.service.ComicDetailService;
 import com.example.test.service.FollowComicService;
-import com.example.test.service.LoginService;
 import com.google.android.flexbox.FlexboxLayout;
 
 import java.util.ArrayList;
@@ -90,6 +91,7 @@ public class ComicDetailFragment extends Fragment {
                 return new ChapterViewHolder(view);
             }
 
+            @SuppressLint("SetTextI18n")
             @Override
             public void onBindViewHolder(@NonNull RecyclerView.ViewHolder holder, int position) {
                 ChapterViewHolder vh = (ChapterViewHolder) holder;
@@ -138,6 +140,7 @@ public class ComicDetailFragment extends Fragment {
         recyclerChapters.addItemDecoration(divider);
     }
 
+    @SuppressLint("SetTextI18n")
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater,
@@ -161,7 +164,8 @@ public class ComicDetailFragment extends Fragment {
         ImageView headerImage = view.findViewById(R.id.headerImage);
         Button btnFollow = view.findViewById(R.id.btnFollow);
         Button btnViewStart = view.findViewById(R.id.btnViewStart);
-        userId = LoginService.userId;
+        Account account = new Account();
+        userId = String.valueOf(account.getAccountId());
         FollowComicService followService = new FollowComicService();
         followService.setUpFollowComic(userId, btnFollow, slug);
 
@@ -173,6 +177,7 @@ public class ComicDetailFragment extends Fragment {
         spinner.startAnimation(rotateAnim);
 
         service.getComicDetail(slug, new LoadCallbackComicDetail() {
+            @SuppressLint("SetTextI18n")
             @Override
             public void onLoadSuccess(ComicDetail comicDetail) {
                 comicDetails = comicDetail;
@@ -246,6 +251,7 @@ public class ComicDetailFragment extends Fragment {
         return view;
     }
 
+    @SuppressLint("SetTextI18n")
     private void makeExpandable(TextView textView, ScrollView containerScroll) {
         textView.post(() -> {
             int lineCount = textView.getLineCount();

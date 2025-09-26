@@ -3,26 +3,20 @@ package com.example.test.service;
 import android.os.Handler;
 import android.os.Looper;
 
-import com.example.test.repository.UsersRepository;
+import com.example.test.entity.Account;
+import com.example.test.repository.AccountRepository;
+import com.example.test.repository.DataCache;
+import com.example.test.repository.LoadCallbackLogin;
 
 public class LoginService {
-    public static String userId;
-    private final UsersRepository usersRepository = new UsersRepository();
+    private final AccountRepository usersRepository = new AccountRepository();
     private final Handler mainHandler = new Handler(Looper.getMainLooper());
 
-    public void CheckLoginAsync(String userName, String password, LoginCallback callback) {
+    public void CheckLoginAsync(String userName, String password, LoadCallbackLogin loadCallbackLogin) {
         new Thread(() -> {
-            boolean result = usersRepository.checkLogin(userName, password);
-            mainHandler.post(() -> {
-                if (result) {
-                    userId = UsersRepository.userId;
-                }
-                callback.onResult(result);
-            });
+            Account account = usersRepository.checkLogin(userName, password);
+            mainHandler.post(() -> loadCallbackLogin.onResult(account));
+            DataCache.account = account;
         }).start();
-    }
-
-    public interface LoginCallback {
-        void onResult(boolean success);
     }
 }

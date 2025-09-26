@@ -50,7 +50,6 @@ public class LoginUI extends AppCompatActivity {
                 // Handler để timeout sau 30s
                 Handler handler = new Handler(Looper.getMainLooper());
                 Runnable timeoutTask = () -> {
-                    // Nếu sau 30s vẫn chưa tắt spinner thì báo lỗi
                     if (spinnerOverlay.getVisibility() == View.VISIBLE) {
                         spinnerOverlay.setVisibility(View.GONE);
                         Toast.makeText(LoginUI.this, "Vui lòng thử lại", Toast.LENGTH_SHORT).show();
@@ -61,10 +60,10 @@ public class LoginUI extends AppCompatActivity {
                 loginService.CheckLoginAsync(
                         emailInput.getText().toString().trim(),
                         passwordInput.getText().toString().trim(),
-                        success -> {
-                            handler.removeCallbacks(timeoutTask); // hủy timeout nếu có phản hồi
+                        account -> {
+                            handler.removeCallbacks(timeoutTask);
 
-                            if (success) {
+                            if (account != null) {
                                 comicListService.handleComicList().thenAccept(successListComic -> {
                                     if (successListComic) {
                                         nextHomeUI();
@@ -77,7 +76,9 @@ public class LoginUI extends AppCompatActivity {
                                     spinnerOverlay.setVisibility(View.GONE);
                                 });
                             }
-                        });
+                        }
+                );
+
             }
         });
 
