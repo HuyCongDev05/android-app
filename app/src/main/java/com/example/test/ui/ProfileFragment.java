@@ -20,11 +20,11 @@ import com.example.test.repository.DataCache;
 import com.example.test.service.UpdateUserService;
 
 public class ProfileFragment extends Fragment {
+    boolean check = false;
     private EditText lastNameInput;
     private EditText firstNameInput;
     private EditText emailInput;
     private EditText phoneInput;
-    boolean check = false;
 
     @Nullable
     @Override
@@ -47,7 +47,8 @@ public class ProfileFragment extends Fragment {
                 check = true;
                 Toast.makeText(getContext(), "Đã mở chỉnh sửa", Toast.LENGTH_SHORT).show();
                 openButtonChange();
-            }else Toast.makeText(getContext(), "Chỉnh sửa đang được mở", Toast.LENGTH_SHORT).show();
+            } else
+                Toast.makeText(getContext(), "Chỉnh sửa đang được mở", Toast.LENGTH_SHORT).show();
         });
 
         updateButton.setOnClickListener(v -> {
@@ -59,9 +60,9 @@ public class ProfileFragment extends Fragment {
             String gmailPattern = "^[a-zA-Z0-9._%+-]+@gmail\\.com$";
             if (lastName.isEmpty() || firstName.isEmpty() || email.isEmpty() || phone.isEmpty()) {
                 Toast.makeText(getContext(), "Vui lòng nhập dữ liệu", Toast.LENGTH_SHORT).show();
-            }else if (phone.matches(phonePattern) || email.matches(gmailPattern)) {
+            } else if (phone.matches(phonePattern) || email.matches(gmailPattern)) {
                 Toast.makeText(getContext(), "Vui lòng nhập đúng email hoặc số điện thoại", Toast.LENGTH_SHORT).show();
-            }else {
+            } else {
                 Account updatedAccount = new Account();
                 updatedAccount.setAccountId(account.getAccountId());
                 updatedAccount.setLastName(lastName);
@@ -84,6 +85,7 @@ public class ProfileFragment extends Fragment {
         });
         return view;
     }
+
     public void openButtonChange() {
         lastNameInput.setFocusableInTouchMode(true);
         lastNameInput.setClickable(true);
@@ -101,6 +103,7 @@ public class ProfileFragment extends Fragment {
         phoneInput.setClickable(true);
         phoneInput.setCursorVisible(true);
     }
+
     public void setUserData(Account account) {
         if (account.getLastName() != null) {
             lastNameInput.setText(account.getLastName());

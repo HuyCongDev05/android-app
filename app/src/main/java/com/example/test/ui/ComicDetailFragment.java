@@ -29,8 +29,8 @@ import androidx.recyclerview.widget.RecyclerView.Adapter;
 import com.bumptech.glide.Glide;
 import com.example.test.R;
 import com.example.test.animation.AnimationUnderline;
-import com.example.test.entity.Account;
 import com.example.test.entity.ComicDetail;
+import com.example.test.repository.DataCache;
 import com.example.test.repository.LoadCallbackComicDetail;
 import com.example.test.service.ComicDetailService;
 import com.example.test.service.FollowComicService;
@@ -42,7 +42,6 @@ import java.util.Objects;
 
 public class ComicDetailFragment extends Fragment {
     public static String chapterName;
-    public static String userId;
     public static List<String> listFollowComic = new ArrayList<>();
     public static String[] arr = new String[]{};
 
@@ -164,10 +163,8 @@ public class ComicDetailFragment extends Fragment {
         ImageView headerImage = view.findViewById(R.id.headerImage);
         Button btnFollow = view.findViewById(R.id.btnFollow);
         Button btnViewStart = view.findViewById(R.id.btnViewStart);
-        Account account = new Account();
-        userId = String.valueOf(account.getAccountId());
         FollowComicService followService = new FollowComicService();
-        followService.setUpFollowComic(userId, btnFollow, slug);
+        followService.setUpFollowComic(String.valueOf(DataCache.account.getAccountId()), btnFollow, slug);
 
         ComicName.setText(nameComic);
         AnimationUnderline animation = new AnimationUnderline(underline, tabDetail, tabChapter);
@@ -224,11 +221,11 @@ public class ComicDetailFragment extends Fragment {
         });
         btnFollow.setOnClickListener(v -> {
             if (ComicDetailFragment.listFollowComic.contains(slug)) {
-                followService.unFollowComic(userId, slug);
+                followService.unFollowComic(String.valueOf(DataCache.account.getAccountId()), slug);
                 ComicDetailFragment.listFollowComic.remove(slug);
                 btnFollow.setText("Theo dõi");
             } else {
-                followService.followComic(userId, slug);
+                followService.followComic(String.valueOf(DataCache.account.getAccountId()), slug);
                 ComicDetailFragment.listFollowComic.add(slug);
                 btnFollow.setText("Đang theo dõi");
             }

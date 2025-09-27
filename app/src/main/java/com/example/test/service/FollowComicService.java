@@ -14,20 +14,34 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class FollowComicService {
-    public void followComic(String userId, String slug) {
+    public static void getFollowComic(String accountId) {
+        GetFollowComicRepository.loadGetFollowComicAsync(accountId, new LoadCallBackFollowComicList() {
+            @Override
+            public void onSuccess(List<String> comics) {
+                DataCache.listFollowComic = comics != null ? comics : new ArrayList<>();
+            }
+
+            @Override
+            public void onError(Exception e) {
+                System.out.println("Lỗi getFollowComic: " + e.getMessage());
+            }
+        });
+    }
+
+    public void followComic(String accountId, String slug) {
         try {
-            loadFollowComicAsync(userId, slug);
+            loadFollowComicAsync(accountId, slug);
         } catch (Exception e) {
             System.out.println("Lỗi followComic: " + e.getMessage());
         }
     }
 
-    public void unFollowComic(String userId, String slug) {
-        loadUnFollowComicAsync(userId, slug);
+    public void unFollowComic(String accountId, String slug) {
+        loadUnFollowComicAsync(accountId, slug);
     }
 
-    public void setUpFollowComic(String userId, Button btnFollow, String slug) {
-        GetFollowComicRepository.loadGetFollowComicAsync(userId, new LoadCallBackFollowComicList() {
+    public void setUpFollowComic(String accountId, Button btnFollow, String slug) {
+        GetFollowComicRepository.loadGetFollowComicAsync(accountId, new LoadCallBackFollowComicList() {
             @Override
             public void onSuccess(List<String> comics) {
                 ComicDetailFragment.listFollowComic = comics != null ? comics : new ArrayList<>();
@@ -38,20 +52,6 @@ public class FollowComicService {
             @Override
             public void onError(Exception e) {
                 System.out.println("Lỗi setUpFollowComic: " + e.getMessage());
-            }
-        });
-    }
-
-    public void getFollowComic(String userId) {
-        GetFollowComicRepository.loadGetFollowComicAsync(userId, new LoadCallBackFollowComicList() {
-            @Override
-            public void onSuccess(List<String> comics) {
-                DataCache.listFollowComic = comics != null ? comics : new ArrayList<>();
-            }
-
-            @Override
-            public void onError(Exception e) {
-                System.out.println("Lỗi getFollowComic: " + e.getMessage());
             }
         });
     }

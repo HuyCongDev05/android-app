@@ -22,6 +22,7 @@ import com.example.test.R;
 import com.example.test.animation.AnimationNext;
 import com.example.test.service.ComicListService;
 import com.example.test.service.LoginService;
+import com.example.test.service.MessageService;
 
 public class LoginUI extends AppCompatActivity {
     LoginService loginService = new LoginService();
@@ -40,7 +41,8 @@ public class LoginUI extends AppCompatActivity {
         ImageView spinner = findViewById(R.id.spinner);
         Animation rotation = AnimationUtils.loadAnimation(this, R.anim.spinner_rotate_anim);
         spinner.startAnimation(rotation);
-
+        MessageService messageService = new MessageService();
+        messageService.getMessage();
 
         registerText.setOnClickListener(v -> register());
         loginButton.setOnClickListener(v -> {

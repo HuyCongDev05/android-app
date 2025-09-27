@@ -18,7 +18,6 @@ import androidx.fragment.app.Fragment;
 
 import com.bumptech.glide.Glide;
 import com.example.test.R;
-import com.example.test.entity.Account;
 import com.example.test.entity.Comic;
 import com.example.test.repository.DataCache;
 import com.example.test.service.FollowComicService;
@@ -38,9 +37,8 @@ public class HomeFragment extends Fragment {
         ImageView iconSearch = view.findViewById(R.id.iconSearch);
         EditText searchInput = view.findViewById(R.id.searchInput);
         View searchOverlay = view.findViewById(R.id.searchOverlay);
-        Account account = new Account();
         FollowComicService followComicService = new FollowComicService();
-        followComicService.getFollowComic(String.valueOf(account.getAccountId()));
+        followComicService.getFollowComic(String.valueOf(DataCache.account.getAccountId()));
 
         iconSearch.setOnClickListener(v -> {
             searchInput.setVisibility(View.VISIBLE);

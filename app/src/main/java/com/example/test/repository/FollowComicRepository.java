@@ -7,10 +7,10 @@ import java.util.concurrent.CompletableFuture;
 public class FollowComicRepository {
     private static final ConnectAPI connectAPI = new ConnectAPI();
 
-    public static void loadFollowComicAsync(String userId, String slug) {
+    public static void loadFollowComicAsync(String accountId, String slug) {
         String jsonData = String.format(
-                "{\"userId\":\"%s\",\"slug\":\"%s\"}",
-                userId, slug
+                "{\"accountId\":\"%s\",\"slug\":\"%s\"}",
+                accountId, slug
         );
 
         CompletableFuture.runAsync(() -> {
@@ -22,10 +22,10 @@ public class FollowComicRepository {
         }, AppExecutors.getNetworkExecutor());
     }
 
-    public static void loadUnFollowComicAsync(String userId, String slug) {
+    public static void loadUnFollowComicAsync(String accountId, String slug) {
         String jsonData = String.format(
-                "{\"userId\":\"%s\",\"slug\":\"%s\"}",
-                userId, slug
+                "{\"accountId\":\"%s\",\"slug\":\"%s\"}",
+                accountId, slug
         );
 
         CompletableFuture.runAsync(() -> {

@@ -1,7 +1,5 @@
 package com.example.test.repository;
 
-import android.annotation.SuppressLint;
-
 import com.example.test.config.ConnectAPI;
 import com.example.test.entity.Account;
 import com.google.gson.Gson;

@@ -24,6 +24,7 @@ import com.example.test.entity.ComicDetail;
 import com.example.test.repository.DataCache;
 import com.example.test.repository.LoadCallbackComicDetail;
 import com.example.test.service.ComicDetailService;
+import com.example.test.service.FollowComicService;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -42,6 +43,20 @@ public class FollowFragment extends Fragment {
         getComicDetailListSequential(DataCache.listFollowComic);
         return rootView;
     }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        loadFollowComic();
+    }
+
+    private void loadFollowComic() {
+        Long accountId = DataCache.account != null ? DataCache.account.getAccountId() : null;
+        if (accountId != null) {
+            FollowComicService.getFollowComic(String.valueOf(accountId));
+        }
+    }
+
 
     public void getComicDetailListSequential(List<String> slugs) {
         if (slugs == null || slugs.isEmpty()) {

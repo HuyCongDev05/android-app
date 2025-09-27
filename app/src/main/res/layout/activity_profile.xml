@@ -1,133 +1,137 @@
 <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:padding="16dp"
-    android:background="#000">
+    android:background="#000"
+    android:padding="16dp">
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="vertical"
-        android:gravity="center_horizontal">
+        android:gravity="center_horizontal"
+        android:orientation="vertical">
 
         <TextView
             android:id="@+id/titleText"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Thông tin cá nhân"
-            android:textSize="20sp"
-            android:textStyle="bold"
             android:layout_marginBottom="40dp"
+            android:gravity="center"
+            android:text="Thông tin cá nhân"
             android:textColor="#FF4D8C"
-            android:gravity="center"/>
+            android:textSize="20sp"
+            android:textStyle="bold" />
 
         <!-- Label + Họ -->
         <TextView
             android:layout_width="320dp"
             android:layout_height="wrap_content"
+            android:layout_marginBottom="4dp"
+            android:gravity="start"
             android:text="Họ"
             android:textColor="#FF4D8C"
-            android:textSize="14sp"
-            android:layout_marginBottom="4dp"
-            android:gravity="start"/>
+            android:textSize="14sp" />
+
         <EditText
             android:id="@+id/firstNameInput"
             android:layout_width="320dp"
             android:layout_height="50dp"
             android:layout_marginBottom="16dp"
             android:background="@drawable/rounded_button"
+            android:clickable="false"
+            android:cursorVisible="false"
+            android:focusable="false"
+            android:gravity="center_vertical|start"
             android:hint="Họ"
             android:inputType="textPersonName"
             android:padding="12dp"
             android:textColor="#FFFFFF"
-            android:textColorHint="#FFFFFF"
-            android:focusable="false"
-            android:clickable="false"
-            android:cursorVisible="false"
-            android:gravity="center_vertical|start"/>
+            android:textColorHint="#FFFFFF" />
 
         <!-- Label + Tên -->
         <TextView
             android:layout_width="320dp"
             android:layout_height="wrap_content"
+            android:layout_marginBottom="4dp"
+            android:gravity="start"
             android:text="Tên"
             android:textColor="#FF4D8C"
-            android:textSize="14sp"
-            android:layout_marginBottom="4dp"
-            android:gravity="start"/>
+            android:textSize="14sp" />
+
         <EditText
             android:id="@+id/lastNameInput"
             android:layout_width="320dp"
             android:layout_height="50dp"
             android:layout_marginBottom="16dp"
             android:background="@drawable/rounded_button"
+            android:clickable="false"
+            android:cursorVisible="false"
+            android:focusable="false"
+            android:gravity="center_vertical|start"
             android:hint="Tên"
             android:inputType="textPersonName"
             android:padding="12dp"
             android:textColor="#FFFFFF"
-            android:textColorHint="#FFFFFF"
-            android:focusable="false"
-            android:clickable="false"
-            android:cursorVisible="false"
-            android:gravity="center_vertical|start"/>
+            android:textColorHint="#FFFFFF" />
 
         <!-- Label + Email -->
         <TextView
             android:layout_width="320dp"
             android:layout_height="wrap_content"
+            android:layout_marginBottom="4dp"
+            android:gravity="start"
             android:text="Email"
             android:textColor="#FF4D8C"
-            android:textSize="14sp"
-            android:layout_marginBottom="4dp"
-            android:gravity="start"/>
+            android:textSize="14sp" />
+
         <EditText
             android:id="@+id/emailInput"
             android:layout_width="320dp"
             android:layout_height="50dp"
             android:layout_marginBottom="16dp"
             android:background="@drawable/rounded_button"
+            android:clickable="false"
+            android:cursorVisible="false"
+            android:focusable="false"
+            android:gravity="center_vertical|start"
             android:hint="Email"
             android:inputType="textEmailAddress"
             android:padding="12dp"
             android:textColor="#FFFFFF"
-            android:textColorHint="#FFFFFF"
-            android:focusable="false"
-            android:clickable="false"
-            android:cursorVisible="false"
-            android:gravity="center_vertical|start"/>
+            android:textColorHint="#FFFFFF" />
 
         <!-- Label + Số điện thoại -->
         <TextView
             android:layout_width="320dp"
             android:layout_height="wrap_content"
+            android:layout_marginBottom="4dp"
+            android:gravity="start"
             android:text="Số điện thoại"
             android:textColor="#FF4D8C"
-            android:textSize="14sp"
-            android:layout_marginBottom="4dp"
-            android:gravity="start"/>
+            android:textSize="14sp" />
+
         <EditText
             android:id="@+id/phoneInput"
             android:layout_width="320dp"
             android:layout_height="50dp"
             android:layout_marginBottom="32dp"
             android:background="@drawable/rounded_button"
+            android:clickable="false"
+            android:cursorVisible="false"
+            android:focusable="false"
+            android:gravity="center_vertical|start"
             android:hint="Số điện thoại"
             android:inputType="phone"
             android:padding="12dp"
             android:textColor="#FFFFFF"
-            android:textColorHint="#FFFFFF"
-            android:focusable="false"
-            android:clickable="false"
-            android:cursorVisible="false"
-            android:gravity="center_vertical|start"/>
+            android:textColorHint="#FFFFFF" />
 
         <!-- Hàng nút ngang -->
         <LinearLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:orientation="horizontal"
+            android:layout_marginBottom="16dp"
             android:gravity="center"
-            android:layout_marginBottom="16dp">
+            android:orientation="horizontal">
 
             <Button
                 android:id="@+id/editButton"
@@ -137,7 +141,7 @@
                 android:backgroundTint="#FF4D8C"
                 android:text="Sửa"
                 android:textColor="#FFFFFF"
-                android:textSize="16sp"/>
+                android:textSize="16sp" />
 
             <Button
                 android:id="@+id/updateButton"
@@ -146,7 +150,7 @@
                 android:backgroundTint="#FF4D8C"
                 android:text="Cập nhật"
                 android:textColor="#FFFFFF"
-                android:textSize="16sp"/>
+                android:textSize="16sp" />
         </LinearLayout>
 
     </LinearLayout>
